@@ -100,7 +100,7 @@ body {
 	background: transparent;
 }
 #camera {
-	width: 90px;
+	width: 75px;
 	height: 28px;
 	position: absolute;
 	top: 7.5px;
@@ -211,11 +211,12 @@ body {
 }
 #h_st {
 	position: absolute;
-	top: 10.5px;
-	left: 26px;
-	font-size: 21px;
+	top: 13.25px;
+	left: 17px;
+	font-size: 18.5px;
 	transition: all 0.25s ease;
 	opacity: 1;
+	font-family: Verdana;
 }
 #h_st.hidden {
 	opacity: 0;
@@ -294,8 +295,8 @@ body {
 	display: flex;
 	align-items: center;
 	position: absolute;
-	right: 21.85px;
-	top: 11px;
+	right: 19.25px;
+	top: 13.5px;
 	width: 32.5px;
 	height: 15px;
 	border: 1px solid #374046;
