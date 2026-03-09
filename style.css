@@ -223,6 +223,8 @@ body {
 }
 #s_home {
 	display: grid;
+	position: absolute;
+	top: 35.5px;
 	padding: 20px;
 	width: 100%;
 	height: auto;
@@ -230,8 +232,6 @@ body {
 	gap: 10px;
 	place-items: center;
 	text-align: center;
-	position: absolute;
-	bottom: 35.5px;
 	box-sizing: border-box;
 }
 .h_icon {
