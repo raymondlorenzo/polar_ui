@@ -100,6 +100,7 @@ const moveLockScreen = ({ swipeY, reset, success }) => {
 	if (success) {
 		lock.style.transition = "top 0.3s ease"
 		lock.style.top = "-100%"
+		if (navigator.vibrate) navigator.vibrate(10)
 		return
 	}
 	if (varlist.locked === false) return
@@ -170,10 +171,12 @@ configureSimpleSwipe({
 		}
 	},
 	startcall: () => {
+		//$("n_bar").classList.add("shrink")
 		$("n_bar").classList.add("visible")
 	},
 	duringMove: moveLockScreen,
 	endcall: () => {
+		//$("n_bar").classList.remove("shrink")
 		clearTimeout(hidingNav)
 		hidingNav = setTimeout(() => {
 			$("n_bar").classList.remove("visible")

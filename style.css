@@ -25,6 +25,10 @@
 	font-family: "Victory_Striker_Sans";
 	src: url("./Victory Striker Sans Demo.woff2");
 }
+@font-face {
+	font-family: "ProductSansMed";
+	src: url("./ProductSans-Medium.woff2");
+}
 * {
 	box-sizing: border-box;
 	user-select: none;
@@ -46,7 +50,7 @@ body {
 	overflow: hidden;
 	text-align: center;
 	margin: 0;
-	font-family: Arial, Verdana;
+	font-family: "ProductSansMed", Verdana;
 }
 #loading_screen {
 	display: none;
@@ -80,8 +84,12 @@ body {
 	left: 0;
 	width: 100%;
 	height: 30px;
-	background: #6660;
+	background: #fff1 !important;
 	z-index: 1000;
+	isolation: auto;
+	mix-blend-mode: normal;
+	mix-blend-mode: difference !important;
+	/* backdrop-filter: blur(20px); */
 }
 #st_n {
 	position: absolute;
@@ -89,7 +97,23 @@ body {
 	left: 0;
 	width: 50%;
 	height: 30px;
-	background: transparent;
+	background: transparent !important;
+	z-index: auto;
+	isolation: auto;
+}
+#h_st {
+	position: absolute;
+	top: 13.25px;
+	left: 17px;
+	font-size: 18.5px;
+	transition: all 0.25s ease;
+	opacity: 1;
+	font-family: "ProductSansMed", Verdana;
+	mix-blend-mode: difference !important;
+	/* z-index: 1002; */
+}
+#h_st.hidden {
+	opacity: 0;
 }
 #st_c {
 	position: absolute;
@@ -97,7 +121,34 @@ body {
 	right: 0;
 	width: 50%;
 	height: 30px;
-	background: transparent;
+	background: transparent !important;
+	isolation: auto;
+}
+#b_sect {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	right: 19.25px;
+	top: 13.5px;
+	width: 32.5px;
+	height: 15px;
+	border: 1px solid white;
+	border-radius: 4px;
+	background: transparent !important;
+	/* overflow: hidden; */
+	isolation: auto;
+	/* mix-blend-mode: difference !important; */
+}
+#b_ind {
+	height: 100%;
+	width: 0%;
+	background: #fff;
+	border-radius: 4px;
+	transition:
+		width 0.5s ease,
+		background 0.35s cubic-bezier(0.7, 0.11, 0.28, 1.13);
+	/* mix-blend-mode: difference !important; */
+	isolation: auto;
 }
 #camera {
 	width: 75px;
@@ -124,6 +175,7 @@ body {
 	z-index: 1001;
 	transition:
 		opacity 0.2s linear,
+		width 0.25s ease,
 		bottom 0.35s ease;
 	/* isolation: auto; */
 }
@@ -146,6 +198,9 @@ body {
 }
 #n_bar.lift {
 	bottom: 20px;
+}
+#n_bar.shrink {
+	width: 80px;
 }
 #s_lock {
 	position: absolute;
@@ -192,7 +247,7 @@ body {
 	top: 8%;
 	left: 50%;
 	translate: -50%;
-	font-family: Sans-Serif;
+	font-family: "ProductSansMed", Verdana;
 	font-size: 27.5px;
 	text-align: center;
 	mix-blend-mode: difference;
@@ -209,22 +264,10 @@ body {
 #t_swipe.visible {
 	opacity: 1;
 }
-#h_st {
-	position: absolute;
-	top: 13.25px;
-	left: 17px;
-	font-size: 18.5px;
-	transition: all 0.25s ease;
-	opacity: 1;
-	font-family: Verdana;
-}
-#h_st.hidden {
-	opacity: 0;
-}
 #s_home {
 	display: grid;
 	position: absolute;
-	top: 35.5px;
+	top: 35.9px;
 	padding: 20px;
 	width: 100%;
 	height: auto;
@@ -273,7 +316,7 @@ body {
 .app_view.hidden {
 	opacity: 0;
 	pointer-events: none;
-	
+
 	transform: scale(0.05) skew(12deg); /* Empieza pequeña */
 }
 
@@ -291,27 +334,6 @@ body {
 #w_settings {
 	padding-top: 35px;
 }
-#b_sect {
-	display: flex;
-	align-items: center;
-	position: absolute;
-	right: 19.25px;
-	top: 13.5px;
-	width: 32.5px;
-	height: 15px;
-	border: 1px solid #374046;
-	border-radius: 3px;
-	background: #84869b11;
-	overflow: hidden;
-}
-#b_ind {
-	height: 100%;
-	width: 0%;
-	background: #fff;
-	transition:
-		width 0.5s ease,
-		background 0.35s cubic-bezier(0.7, 0.11, 0.28, 1.13);
-}
 
 #c_hour {
 	position: absolute;
@@ -326,7 +348,7 @@ body {
 	top: 200px;
 	left: 50%;
 	translate: -50%;
-	font-family: Verdana;
+	font-family: "ProductSansMed", Verdana;
 	font-size: 17.5px;
 }
 #s_w_carr {
@@ -382,4 +404,7 @@ label {
 	border-radius: 20px;
 	background: white;
 	color: black;
+}
+#w_none {
+	align-content: center;
 }
