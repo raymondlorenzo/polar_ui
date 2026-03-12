@@ -8,6 +8,7 @@ const varlist = {
 	locked: true
 }
 let hidingNav
+let openApps = []
 const configureSimpleSwipe = ({
 	axis,
 	dir,
@@ -78,7 +79,7 @@ const configureSimpleSwipe = ({
 	}
 
 	;["touchstart", "mousedown"].forEach((ev) => {
-		target.addEventListener(ev, start)
+		target.addEventListener(ev, start, { passive: false })
 	})
 	;["touchend", "mouseup"].forEach((ev) => {
 		target.addEventListener(ev, end)
@@ -93,12 +94,12 @@ const moveLockScreen = ({ swipeY, reset, success }) => {
 	if (!lock) return
 	if (reset) {
 		if (varlist.locked === false) return
-		lock.style.transition = "top 0.3s ease"
+		lock.style.transition = "top calc(0.3s * var(--delta-time)) ease"
 		lock.style.top = "0px"
 		return
 	}
 	if (success) {
-		lock.style.transition = "top 0.3s ease"
+		lock.style.transition = "top calc(0.3s * var(--delta-time)) ease"
 		lock.style.top = "-100%"
 		if (navigator.vibrate) navigator.vibrate(10)
 		return
@@ -114,12 +115,12 @@ const showLockScreen = ({ swipeY, reset, success }) => {
 	if (!lock) return
 	if (reset) {
 		if (varlist.locked) return
-		lock.style.transition = "top 0.3s ease"
+		lock.style.transition = "top calc(0.3s * var(--delta-time)) ease"
 		lock.style.top = "-100%"
 		return
 	}
 	if (success) {
-		lock.style.transition = "top 0.3s ease"
+		lock.style.transition = "top calc(0.3s * var(--delta-time)) ease"
 		lock.style.top = "0px"
 		return
 	}
@@ -248,6 +249,9 @@ const openApp = (i, w) => {
 	hidingNav = setTimeout(() => {
 		$("n_bar").classList.remove("visible")
 	}, 1205)
+	if (!openApps.includes(w)) {
+		openApps.push(w)
+	}
 }
 
 $qa(".h_icon").forEach((icon) => {
@@ -343,5 +347,18 @@ $qa(".img_wall").forEach((img) => {
 	img.addEventListener("click", () => {
 		const src = img.getAttribute("src")
 		setWP(src)
+	})
+})
+
+$qa(".sub-sel").forEach((el) => {
+	el.addEventListener("click", () => {
+		const shouldopen = el.getAttribute("data-subapp")
+		$(shouldopen).classList.remove("hidden")
+	})
+})
+$qa(".subapp_exit").forEach((el) => {
+	el.addEventListener("click", () => {
+		const shouldopen = el.getAttribute("data-closes")
+		$(shouldopen).classList.add("hidden")
 	})
 })
