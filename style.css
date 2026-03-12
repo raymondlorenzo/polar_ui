@@ -79,6 +79,7 @@ body {
 	margin: 0;
 	overflow: hidden;
 	isolation: isolate;
+	scale: 0.975;
 }
 #status {
 	position: absolute;
@@ -475,6 +476,19 @@ div.group_middle {
 	border: none;
 	background: var(--sys-fourth);
 	margin: 1px;
+}
+div.group_alone {
+	width: 82.5%;
+	height: 40px;
+	align-content: center;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	padding: 8px;
+	border: none;
+	background: var(--sys-fourth);
+	margin: 2px;
 }
 div.group_lower {
 	width: 82.5%;
