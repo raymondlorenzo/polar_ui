@@ -35,9 +35,6 @@
 	box-sizing: border-box;
 	user-select: none;
 }
-/* TODO:
-fix the navbar not blending
-*/
 html {
 	height: 100vh;
 	overflow: hidden;
@@ -249,7 +246,12 @@ body {
 }
 #h_lo.hard-light {
 	mix-blend-mode: hard-light;
-	opacity: 0.775;
+	opacity: 0.725;
+}
+#h_lo.overlay {
+	mix-blend-mode: overlay;
+	opacity: 1;
+	filter: brightness(2.1);
 }
 #h_lo.exclusion {
 	mix-blend-mode: exclusion;
@@ -263,7 +265,7 @@ body {
 	font-family: "ProductSansMed", Verdana;
 	font-size: 27.5px;
 	text-align: center;
-	mix-blend-mode: difference;
+	mix-blend-mode: invert;
 }
 #t_swipe {
 	position: absolute;
@@ -372,16 +374,13 @@ body {
 }
 #s_w_carr {
 	width: 95%;
-	height: 160px;
+	height: 162px !important;
 	border-radius: 15px;
 	display: flex;
 	align-items: center;
-	overflow-x: scroll;
+	overflow-x: auto;
+	flex-shrink: 0;
 	gap: 12.5px;
-	/* position: absolute;
-	top: unset;
-	left: 50%;
-	translate: -50%;*/
 	border: 2px solid #fff2;
 	background: #fff0;
 }
@@ -391,7 +390,16 @@ body {
 	border-radius: 20px;
 	object-fit: cover;
 	box-shadow: 2px 2px 3px #00000055;
+	flex-shrink: 0;
 }
+#s_w_carr::-webkit-scrollbar {
+	display: none;
+}
+#s_w_carr {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
 .term_header {
 	background: #222;
 	padding: 40px 0 10px;
@@ -416,7 +424,7 @@ body {
 		opacity: 0;
 	}
 }
-label {
+label.styled {
 	width: calc(auto + 30px);
 	height: calc(auto + 10px);
 	padding: 10px;
@@ -492,6 +500,7 @@ div.group_upper {
 	border: none;
 	background: var(--sys-fourth);
 	margin: 1px;
+	overflow: hidden;
 }
 div.group_alone {
 	border-top-left-radius: 25px;
@@ -499,6 +508,7 @@ div.group_alone {
 	border-bottom-left-radius: 25px;
 	border-bottom-right-radius: 25px;
 	margin: 5px;
+	overflow: hidden;
 }
 .subapp {
 	position: absolute;
@@ -539,8 +549,11 @@ div.group_alone {
 	width: 100%;
 	align-items: center;
 	justify-content: center;
+	position: sticky;
+	top: 0;
+	z-index: 10;
 }
-.globheader p{
+.globheader p {
 	font-size: 14px;
 }
 #suba_ext {
@@ -563,10 +576,52 @@ div.group_alone {
 		transform: translateY(0%);
 	}
 }
-select{
+select {
 	min-width: 130px;
 	min-height: 27.5px;
 	padding: 7.5px;
 	border-radius: 10px;
 	outline: none;
+	font-family: "ProductSansMed", Verdana;
+}
+.radio_label {
+	display: flex;
+	gap: 7.5px;
+	padding: 0 10px;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	background: transparent;
+}
+input[type="radio"] {
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	border: 2px solid var(--sys-second);
+	border-radius: 50%;
+	outline: none;
+	cursor: pointer;
+	position: relative;
+	flex-shrink: 0;
+}
+input[type="radio"]:checked::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 10px;
+	height: 10px;
+	background: var(--sys-second);
+	border-radius: 50%;
+}
+#w_set_per {
+	overflow-y: scroll;
+}
+.app_view,
+.subapp {
+	overflow-y: auto;
+	padding-bottom: 50px;
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
 }

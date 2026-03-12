@@ -1,6 +1,6 @@
 // First of all, I won't fix spagetthi code, ai'm not that expert on progarming
 // TODO:
-// - Add bounce on apñ open
+// - Add bounce on app open, like the app going down lightly when opening
 
 const $ = (id) => document.getElementById(id)
 const $qa = (id) => document.querySelectorAll(id)
@@ -367,8 +367,9 @@ $qa(".subapp_exit").forEach((el) => {
 })
 
 const savedCStyle = localStorage.getItem("polar_cstyle")
-$("h_lo").classList.remove("exclusion")
-$("h_lo").classList.remove("hard-light")
+const listCStyle = ["exclusion", "hard-light", "overlay"]
+
+listCStyle.forEach((st) => $("h_lo").classList.remove(st))
 $("h_lo").classList.add(savedCStyle)
 $("p_cstyle").value = savedCStyle
 
@@ -377,16 +378,19 @@ $("p_cstyle").addEventListener("change", () => {
 	const h_lo = $("h_lo")
 	switch (cstyle.value) {
 		case "exclusion":
-			$("h_lo").classList.remove("exclusion")
-			$("h_lo").classList.remove("hard-light")
+			listCStyle.forEach((st) => $("h_lo").classList.remove(st))
 			$("h_lo").classList.add("exclusion")
 			localStorage.setItem("polar_cstyle", "exclusion")
 			break
 		case "hard-light":
-			$("h_lo").classList.remove("exclusion")
-			$("h_lo").classList.remove("hard-light")
+			listCStyle.forEach((st) => $("h_lo").classList.remove(st))
 			$("h_lo").classList.add("hard-light")
 			localStorage.setItem("polar_cstyle", "hard-light")
+			break
+		case "overlay":
+			listCStyle.forEach((st) => $("h_lo").classList.remove(st))
+			$("h_lo").classList.add("overlay")
+			localStorage.setItem("polar_cstyle", "overlay")
 			break
 	}
 })
