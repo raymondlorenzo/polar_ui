@@ -414,9 +414,9 @@ body {
 	padding: 20px;
 	color: #0f0;
 	font-family: monospace;
-	font-size: 14px;
+	font-size: 12px;
 	text-align: left;
-	line-height: 0.2rem;
+	line-height: 0.15rem;
 }
 .cursor {
 	animation: blink 1s step-end infinite;
