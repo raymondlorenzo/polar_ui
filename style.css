@@ -65,8 +65,8 @@ body {
 	height: var(--sys-height);
 	border: 2px solid black;
 	/* border-bottom: 7.5px solid black; */
-	outline: 1px solid white;
-	outline-offset: 2px;
+	/*outline: 1px solid white;
+	outline-offset: 2px;*/
 	border-radius: var(--sys-radius);
 	background-image: var(--sys-bg);
 	background-color: #8ac6d0;
@@ -78,6 +78,7 @@ body {
 	background-attachment: local;
 	isolation: isolate;
 	scale: 0.975;
+	box-shadow: 0 0 0 1px white, var(--sys-shadow);
 }
 #status {
 	position: absolute;
@@ -639,4 +640,13 @@ input[type="radio"]:checked::before {
 	-webkit-backdrop-filter: blur(7.5px); /* Safari */
 	backdrop-filter: blur(7.5px);
 	will-change: backdrop-filter; /* Ayuda a Firefox a preparar el render */
+}
+#s_lock,
+.app_view,
+.subapp,
+#h_lo,
+#h_st {
+	will-change: transform, opacity, backdrop-filter;
+	/* Fuerza a Firefox a crear una capa de dibujo independiente */
+	transform: translateZ(0);
 }
