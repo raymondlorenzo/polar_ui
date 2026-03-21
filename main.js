@@ -41,10 +41,12 @@ const configureSimpleSwipe = ({
 
 	const move = (e) => {
 		if (!isDragging) return
-		const point = e.touches[0] ?? e
+		const point = e.touches ? e.touches[0] : e
 		const swipeX = point.clientX - startX
 		const swipeY = point.clientY - startY
-		duringMove({ swipeX, swipeY })
+		if (Math.abs(swipeY) > 5 || Math.abs(swipeX) > 5) {
+			duringMove({ swipeX, swipeY })
+		}
 	}
 
 	const end = (e) => {
@@ -82,7 +84,7 @@ const configureSimpleSwipe = ({
 		target.addEventListener(ev, start, { passive: false })
 	})
 	;["touchend", "mouseup"].forEach((ev) => {
-		target.addEventListener(ev, end)
+		target.addEventListener(ev, end, { passive: false })
 	})
 	;["touchmove", "mousemove"].forEach((ev) => {
 		window.addEventListener(ev, move)
@@ -247,6 +249,7 @@ const openApp = (i, w) => {
 	const skVal = screenMiddle + centerX >= 300 ? 15 : -15
 	/*appWin.style.transform = `skew(${skVal}deg)`*/
 	appWin.classList.remove("hidden")
+	appWin.style.pointerEvents = "auto"
 	home.classList.add("zoom-out")
 	$("n_bar").classList.add("visible")
 	clearTimeout(hidingNav)
