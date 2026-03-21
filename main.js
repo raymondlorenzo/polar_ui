@@ -299,7 +299,7 @@ if ("getBattery" in navigator) {
 		battery.addEventListener("chargingchange", updateBatteryStatus)
 	})
 } else {
-	alert("Battery API no soportada en este navegador.")
+	alert("Battery API is not supported in this browser, this may be because you're on Firefox or Safari. Sorry for the problem.")
 	$("b_ind").style.width = `100%` // Valor por defecto para que no se vea vacío
 }
 
