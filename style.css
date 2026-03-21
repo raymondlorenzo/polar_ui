@@ -306,7 +306,7 @@ body {
 	padding: 0;
 	cursor: pointer;
 	background: rgba(255, 255, 255, 0.2);
-	backdrop-filter: blur(5px);
+	/* backdrop-filter: blur(5px); */
 	transition:
 		transform calc(0.1s * var(--delta-time)) ease,
 		filter calc(0.2s * var(--delta-time)) ease,
@@ -641,7 +641,7 @@ input[type="radio"]:checked::before {
 	-webkit-overflow-scrolling: touch;
 }
 #s_lock,
-.h_icon,
+/* .h_icon, */
 .app_view {
 	-webkit-backdrop-filter: blur(7.5px); /* Safari */
 	backdrop-filter: blur(7.5px);

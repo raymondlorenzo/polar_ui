@@ -402,3 +402,6 @@ $("p_cstyle").addEventListener("change", () => {
 			break
 	}
 })
+$("bright-slider").addEventListener("input", () => {
+	$("screen").style.filter = "brightness("+$("bright-slider").value+")"
+})
