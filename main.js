@@ -1,6 +1,6 @@
 // First of all, I won't fix spagetthi code, ai'm not expert on progarming
 // TODO:
-// - Add bounce on app open, like the app going down lightly when opening
+// - Add bounce on app open, like the app going down lightly when opening, maybe it should work
 
 const $ = (id) => document.getElementById(id)
 const $qa = (id) => document.querySelectorAll(id)
