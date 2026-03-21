@@ -1,4 +1,4 @@
-// First of all, I won't fix spagetthi code, ai'm not that expert on progarming
+// First of all, I won't fix spagetthi code, ai'm not expert on progarming
 // TODO:
 // - Add bounce on app open, like the app going down lightly when opening
 

@@ -1,6 +1,6 @@
 # PolarUI
 
-Mobile OS inspired Web UI
+Mobile OS inspired Web UI with _glassmorphism_ style
 
 <div align="center">
 <img src="./favicon.png" width="100">
