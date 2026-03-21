@@ -1,9 +1,9 @@
-# PolarUI
+# PolarUI 26
 
-Mobile OS inspired Web UI with _glassmorphism_ style
+Mobile OS inspired Web UI feauturing _glassmorphism_ style and active development
 
 <div align="center">
-<img src="./favicon.png" width="120">
+<img src="./favicon.png" width="200">
 <br>
 <img src="https://img.shields.io/github/repo-size/raysterling00/polar_ui?style=for-the-badge&color=8ac6d0" alt="Repo Size">
 <img src="https://img.shields.io/github/languages/code-size/raysterling00/polar_ui?style=for-the-badge&color=8ac6d0" alt="Code Size">
