@@ -407,5 +407,5 @@ $("p_cstyle").addEventListener("change", () => {
 	}
 })
 $("bright-slider").addEventListener("input", () => {
-	$("screen").style.filter = "brightness("+$("bright-slider").value+")"
+	$("screen").style.filter = "brightness(" + $("bright-slider").value + ")"
 })
