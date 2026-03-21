@@ -271,10 +271,8 @@ const closeApp = () => {
 	const views = $qa(".app_view")
 	const home = $("s_home")
 	views.forEach((view) => {
-		requestAnimationFrame(() => {
-			view.classList.add("hidden")
-			$("s_home").classList.remove("zoom-out")
-		})
+		view.classList.add("hidden")
+		$("s_home").classList.remove("zoom-out")
 	})
 }
 
