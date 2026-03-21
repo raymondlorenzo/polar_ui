@@ -416,7 +416,7 @@ body {
 	font-family: monospace;
 	font-size: 12px;
 	text-align: left;
-	line-height: 0.15rem;
+	line-height: 0.11rem;
 }
 .cursor {
 	animation: blink 1s step-end infinite;
@@ -503,6 +503,7 @@ div.group_upper {
 	background: var(--sys-fourth);
 	margin: 1px;
 	overflow: hidden;
+	font-size: 13.5px;
 }
 div.group_alone {
 	border-top-left-radius: 25px;
