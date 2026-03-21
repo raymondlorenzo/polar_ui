@@ -114,6 +114,7 @@ body {
 	opacity: 1;
 	font-family: "ProductSansMed", Verdana;
 	mix-blend-mode: difference !important;
+	scale: 0.85;
 	/* z-index: 1002; */
 }
 #h_st.hidden {
@@ -141,6 +142,7 @@ body {
 	background: transparent !important;
 	overflow: hidden;
 	isolation: auto;
+	scale: 0.9;
 	/* mix-blend-mode: difference !important; */
 }
 #b_ind {
@@ -160,13 +162,18 @@ body {
 	width: 75px;
 	height: 24px;
 	position: absolute;
-	top: 7.5px;
+	top: 8.25px;
 	/* top: 0; */
 	left: 50%;
 	translate: -50%;
 	border-radius: /* 0 0 var(--sys-radius) */ var(--sys-radius);
 	background: #000;
 	z-index: 1000;
+	transition: width 0.325s ease;
+	will-change: width;
+}
+#camera.faceid{
+	width: 100px;
 }
 #n_bar {
 	position: absolute;
@@ -297,6 +304,7 @@ body {
 	place-items: center;
 	text-align: center;
 	box-sizing: border-box;
+	pointer-events: auto;
 }
 .h_icon {
 	width: 50px;
@@ -360,6 +368,7 @@ body {
 #s_home.zoom-out {
 	transform: scale(0.525);
 	opacity: 0.25;
+	pointer-events: none;
 	/* filter: blur(2.5px); */
 }
 

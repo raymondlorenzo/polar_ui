@@ -103,7 +103,7 @@ const moveLockScreen = ({ swipeY, reset, success }) => {
 	if (success) {
 		lock.style.transition = "top calc(0.3s * var(--delta-time)) ease"
 		lock.style.top = "-105%"
-		if (navigator.vibrate) navigator.vibrate(50)
+		if (navigator.vibrate) navigator.vibrate(175)
 		return
 	}
 	if (varlist.locked === false) return
@@ -170,7 +170,11 @@ configureSimpleSwipe({
 			varlist.locked = false
 			updateLockState()
 			$("h_st").classList.remove("hidden")
-			$("s_home").classList.remove("zoom-out")
+			$("camera").classList.add("faceid")
+			setTimeout(() => {
+				$("s_home").classList.remove("zoom-out")
+				$("camera").classList.remove("faceid")
+			}, 500)
 		} else {
 			closeApp()
 		}
