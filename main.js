@@ -1,7 +1,3 @@
-// First of all, I won't fix spagetthi code, ai'm not expert on progarming
-// TODO:
-// - Add bounce on app open, like the app going down lightly when opening, maybe it should work
-
 const $ = (id) => document.getElementById(id)
 const $qa = (id) => document.querySelectorAll(id)
 const varlist = {
@@ -103,7 +99,7 @@ const moveLockScreen = ({ swipeY, reset, success }) => {
 	if (success) {
 		lock.style.transition = "top calc(0.3s * var(--delta-time)) ease"
 		lock.style.top = "-105%"
-		if (navigator.vibrate) navigator.vibrate(175)
+		/*if (navigator.vibrate) */ navigator.vibrate(30)
 		return
 	}
 	if (varlist.locked === false) return
@@ -170,11 +166,7 @@ configureSimpleSwipe({
 			varlist.locked = false
 			updateLockState()
 			$("h_st").classList.remove("hidden")
-			$("camera").classList.add("faceid")
-			setTimeout(() => {
-				$("s_home").classList.remove("zoom-out")
-				$("camera").classList.remove("faceid")
-			}, 500)
+			$("s_home").classList.remove("zoom-out")
 		} else {
 			closeApp()
 		}
@@ -254,6 +246,7 @@ const openApp = (i, w) => {
 	/*appWin.style.transform = `skew(${skVal}deg)`*/
 	appWin.classList.remove("hidden")
 	appWin.style.pointerEvents = "auto"
+	navigator.vibrate(20)
 	home.classList.add("zoom-out")
 	$("n_bar").classList.add("visible")
 	clearTimeout(hidingNav)
@@ -385,27 +378,13 @@ listCStyle.forEach((st) => $("h_lo").classList.remove(st))
 $("h_lo").classList.add(savedCStyle)
 $("p_cstyle").value = savedCStyle
 
-$("p_cstyle").addEventListener("change", () => {
-	const cstyle = $("p_cstyle")
-	const h_lo = $("h_lo")
-	switch (cstyle.value) {
-		case "exclusion":
-			listCStyle.forEach((st) => $("h_lo").classList.remove(st))
-			$("h_lo").classList.add("exclusion")
-			localStorage.setItem("polar_cstyle", "exclusion")
-			break
-		case "hard-light":
-			listCStyle.forEach((st) => $("h_lo").classList.remove(st))
-			$("h_lo").classList.add("hard-light")
-			localStorage.setItem("polar_cstyle", "hard-light")
-			break
-		case "overlay":
-			listCStyle.forEach((st) => $("h_lo").classList.remove(st))
-			$("h_lo").classList.add("overlay")
-			localStorage.setItem("polar_cstyle", "overlay")
-			break
-	}
+$("p_cstyle").addEventListener("change", (e) => {
+	const newStyle = e.target.value
+	listCStyle.forEach((st) => $("h_lo").classList.remove(st))
+	$("h_lo").classList.add(newStyle)
+	localStorage.setItem("polar_cstyle", newStyle)
 })
+
 $("bright-slider").addEventListener("input", () => {
 	$("screen").style.filter = "brightness(" + $("bright-slider").value + ")"
 })

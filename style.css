@@ -665,3 +665,71 @@ input[type="radio"]:checked::before {
 	/* Fuerza a Firefox a crear una capa de dibujo independiente */
 	transform: translateZ(0);
 }
+
+div[class^="group_"] {
+	will-change: background;
+	transition: background 0.1s ease;
+}
+div[class^="group_"]:active {
+	background: var(--sys-third); /* O un color más claro que el actual */
+	filter: brightness(1.2);
+}
+
+.nostyle {
+	all: unset;
+}
+
+input[type="range"] {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 80%;
+	background: transparent;
+	cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+	background: var(--sys-fourth);
+	border: 2px solid var(--sys-second);
+	height: 10px;
+	border-radius: 10px;
+}
+/* firefox */
+input[type="range"]::-moz-range-track {
+	background: var(--sys-fourth);
+	border: 2px solid var(--sys-second);
+	height: 10px;
+	border-radius: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	margin-top: -6px;
+	background-color: whitesmoke;
+	height: 18px;
+	width: 32px;
+	border-radius: 30px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+	transition: transform 0.1s ease;
+}
+/* firefox */
+input[type="range"]::-moz-range-thumb {
+	border: none;
+	background-color: whitesmoke;
+	height: 18px;
+	width: 32px;
+	border-radius: 30px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+	transform: scale(1.2);
+	opacity: 0.5;
+}
+input[type="range"]:active::-moz-range-thumb {
+	transform: scale(1.2);
+	opacity: 0.5;
+}
+input[type="range"]::-moz-range-progress{
+	background: var(--sys-second);
+	height: 10px;
+}
