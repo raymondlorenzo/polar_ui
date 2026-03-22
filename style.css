@@ -52,9 +52,23 @@ body {
 	font-family: "ProductSansMed", Verdana;
 }
 #loading_screen {
-	display: none;
-	width: 100vw;
-	height: 100vh;
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2001;
+	background: var(--sys-fifth);
+	align-items: center;
+	justify-content: center;
+	transition: display 0.25s ease;
+}
+#loading_title {
+	scale: 1.6;
+	transition:
+		scale 0.55s ease,
+		transform 0.55s ease;
 }
 #screen {
 	position: absolute;
@@ -168,7 +182,7 @@ body {
 	translate: -50%;
 	border-radius: /* 0 0 var(--sys-radius) */ var(--sys-radius);
 	background: #000;
-	z-index: 1000;
+	z-index: 2002;
 	transition: width 0.325s ease;
 	will-change: width;
 }
@@ -186,7 +200,7 @@ body {
 	background: white;
 	mix-blend-mode: exclusion !important;
 	opacity: 0;
-	z-index: 1001;
+	z-index: 2000;
 	transition:
 		opacity calc(0.2s * var(--delta-time)) linear,
 		width calc(0.25s * var(--delta-time)) ease,
@@ -200,7 +214,7 @@ body {
 	width: 100%;
 	height: 30px;
 	background: rgba(255, 255, 255, 0);
-	z-index: 1000;
+	z-index: 2000;
 	cursor: grab;
 	/* backdrop-filter: blur(10px); */
 }
@@ -228,7 +242,7 @@ body {
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
-	z-index: 999;
+	z-index: 1999;
 	transition:
 		top calc(0.3s * var(--delta-time)) ease,
 		backdrop-filter calc(0.25s * var(--delta-time)) ease,
@@ -668,7 +682,7 @@ input[type="radio"]:checked::before {
 
 div[class^="group_"] {
 	will-change: background;
-	transition: background 0.1s ease;
+	transition: background 0.15s ease;
 }
 div[class^="group_"]:active {
 	background: var(--sys-third); /* O un color más claro que el actual */
@@ -729,7 +743,7 @@ input[type="range"]:active::-moz-range-thumb {
 	transform: scale(1.2);
 	opacity: 0.5;
 }
-input[type="range"]::-moz-range-progress{
+input[type="range"]::-moz-range-progress {
 	background: var(--sys-second);
 	height: 10px;
 }

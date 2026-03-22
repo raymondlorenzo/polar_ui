@@ -297,7 +297,9 @@ if ("getBattery" in navigator) {
 		battery.addEventListener("chargingchange", updateBatteryStatus)
 	})
 } else {
-	alert("Battery API is not supported in this browser, this may be because you're on Firefox or Safari. Sorry for the inconvinience.")
+	alert(
+		"Battery API is not supported in this browser, this may be because you're on Firefox or using an iOS device. Sorry for the inconvinience."
+	)
 	$("b_ind").style.width = `100%` // Valor por defecto para que no se vea vacío
 }
 
@@ -387,4 +389,17 @@ $("p_cstyle").addEventListener("change", (e) => {
 
 $("bright-slider").addEventListener("input", () => {
 	$("screen").style.filter = "brightness(" + $("bright-slider").value + ")"
+})
+
+window.addEventListener("load", () => {
+	setTimeout(() => {
+		$("loading_title").style.scale = "1.25"
+	}, 500)
+	setTimeout(() => {
+		setInterval(() => {
+			// $("loading_title").textContent.slice(1)
+			$("loading_title").textContent = $("loading_title").textContent.slice(0, -1)
+		}, 125)
+	}, 500)
+	setTimeout(() => ($("loading_screen").style.display = "none"), 2750)
 })
