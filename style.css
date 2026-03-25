@@ -9,7 +9,7 @@
 	/* local vars*/
 	--sys-height: 570px;
 	--sys-width: 280px;
-	--sys-radius: 48.25px;
+	--sys-radius: 50px;
 
 	/* appearance parameters */
 	--sys-blur: 3px;
@@ -62,7 +62,10 @@ body {
 	background: var(--sys-fifth);
 	align-items: center;
 	justify-content: center;
-	transition: display 0.25s ease;
+	transition:
+		display 0.25s ease,
+		opacity 0.5s ease,
+		visibility 0.5s ease;
 }
 #loading_title {
 	scale: 1.6;
@@ -78,9 +81,6 @@ body {
 	width: var(--sys-width);
 	height: var(--sys-height);
 	border: 2px solid black;
-	/* border-bottom: 7.5px solid black; */
-	/*outline: 1px solid white;
-	outline-offset: 2px;*/
 	border-radius: var(--sys-radius);
 	background-image: var(--sys-bg);
 	background-color: #8ac6d0;
@@ -89,7 +89,6 @@ body {
 	padding: 0;
 	margin: 0;
 	overflow: hidden;
-	background-attachment: local;
 	isolation: isolate;
 	scale: 0.975;
 	box-shadow:
@@ -103,11 +102,10 @@ body {
 	width: 100%;
 	height: 30px;
 	background: #ffffff01 !important;
-	z-index: 1000;
+	z-index: 2001;
 	isolation: auto;
 	mix-blend-mode: normal;
 	mix-blend-mode: difference !important;
-	/* backdrop-filter: blur(20px); */
 }
 #st_n {
 	position: absolute;
@@ -129,7 +127,6 @@ body {
 	font-family: "ProductSansMed", Verdana;
 	mix-blend-mode: difference !important;
 	scale: 0.85;
-	/* z-index: 1002; */
 }
 #h_st.hidden {
 	opacity: 0;
@@ -157,7 +154,6 @@ body {
 	overflow: hidden;
 	isolation: auto;
 	scale: 0.9;
-	/* mix-blend-mode: difference !important; */
 }
 #b_ind {
 	height: 100%;
@@ -169,18 +165,15 @@ body {
 	transition:
 		width calc(0.5s * var(--delta-time)) ease,
 		background calc(0.35s * var(--delta-time)) cubic-bezier(0.7, 0.11, 0.28, 1.13);
-	/* mix-blend-mode: difference !important; */
 	isolation: auto;
 }
 #camera {
 	width: 75px;
 	height: 24px;
 	position: absolute;
-	top: 8.25px;
-	/* top: 0; */
-	left: 50%;
+	top: 8.25px;	left: 50%;
 	translate: -50%;
-	border-radius: /* 0 0 var(--sys-radius) */ var(--sys-radius);
+	border-radius: var(--sys-radius);
 	background: #000;
 	z-index: 2002;
 	transition: width 0.325s ease;
@@ -204,9 +197,7 @@ body {
 	transition:
 		opacity calc(0.2s * var(--delta-time)) linear,
 		width calc(0.25s * var(--delta-time)) ease,
-		bottom calc(0.35s * var(--delta-time)) ease;
-	/* isolation: auto; */
-}
+		bottom calc(0.35s * var(--delta-time)) ease;}
 #nav_sect {
 	position: absolute;
 	bottom: 0;
@@ -215,9 +206,7 @@ body {
 	height: 30px;
 	background: rgba(255, 255, 255, 0);
 	z-index: 2000;
-	cursor: grab;
-	/* backdrop-filter: blur(10px); */
-}
+	cursor: grab;}
 #n_bar.hidden {
 	opacity: 0;
 }
@@ -247,7 +236,6 @@ body {
 		top calc(0.3s * var(--delta-time)) ease,
 		backdrop-filter calc(0.25s * var(--delta-time)) ease,
 		background calc(0.2s * var(--delta-time)) ease;
-	/* backdrop-filter: blur(4px); */
 	box-shadow: var(--sys-shadow);
 }
 #s_lock.locked {
@@ -328,7 +316,6 @@ body {
 	padding: 0;
 	cursor: pointer;
 	background: rgba(255, 255, 255, 0.2);
-	/* backdrop-filter: blur(5px); */
 	transition:
 		transform calc(0.1s * var(--delta-time)) ease,
 		filter calc(0.2s * var(--delta-time)) ease,
@@ -347,7 +334,7 @@ body {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: var(--sys-fifth); /* O el color que prefieras */
+	background: var(--sys-fifth);
 	z-index: 500;
 	border-radius: var(--sys-radius);
 	transition:
@@ -356,10 +343,10 @@ body {
 		width calc(0.4s * var(--delta-time)) ease,
 		height calc(0.4s * var(--delta-time)) ease,
 		border-radius calc(0.4s * var(--delta-time)) ease;
-	transform-origin: center; /* Esto se ajustará con JS */
+	transform-origin: center;
 	overflow: auto;
 	overflow-x: hidden;
-	pointer-events: none; /* Por defecto, ninguna app recibe clics */
+	pointer-events: none;
 }
 
 .app_view:not(.hidden) {
@@ -370,10 +357,9 @@ body {
 	opacity: 0;
 	border-radius: 100px;
 	pointer-events: none;
-	transform: scale(0.05); /* Empieza pequeña */
+	transform: scale(0.05);
 }
 
-/* Animación de retroceso para el home */
 #s_home {
 	transition:
 		transform calc(0.45s * var(--delta-time)) ease,
@@ -382,9 +368,7 @@ body {
 #s_home.zoom-out {
 	transform: scale(0.525);
 	opacity: 0.1;
-	pointer-events: none;
-	/* filter: blur(2.5px); */
-}
+	pointer-events: none;}
 
 #w_settings {
 	padding-top: 35px;
@@ -425,6 +409,13 @@ body {
 	object-fit: cover;
 	box-shadow: 2px 2px 3px #00000055;
 	flex-shrink: 0;
+	transition:
+		scale 0.3s ease,
+		filter 0.35s ease;
+}
+#s_w_carr img:active {
+	scale: 0.9;
+	filter: brightness(0.8);
 }
 #s_w_carr::-webkit-scrollbar {
 	display: none;
@@ -500,7 +491,6 @@ button.group_middle {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* justify-content: center; */
 	text-align: center;
 }
 div.group_upper {
@@ -553,7 +543,7 @@ div.group_alone {
 	max-width: 100%;
 	overflow-x: hidden;
 	height: 100%;
-	background: var(--sys-fifth); /* O el color que prefieras */
+	background: var(--sys-fifth);
 	z-index: 501;
 	border-radius: var(--sys-radius);
 	transition:
@@ -565,14 +555,11 @@ div.group_alone {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* justify-content: center; */
 	text-align: center;
 }
 
 .subapp.hidden {
 	opacity: 0;
-	/* width: 75px;
-	height: 75px; */
 	pointer-events: none;
 	left: 100%;
 }
@@ -664,11 +651,10 @@ input[type="radio"]:checked::before {
 	-webkit-overflow-scrolling: touch;
 }
 #s_lock,
-/* .h_icon, */
 .app_view {
-	-webkit-backdrop-filter: blur(7.5px); /* Safari */
+	-webkit-backdrop-filter: blur(7.5px);
 	backdrop-filter: blur(7.5px);
-	will-change: backdrop-filter; /* Ayuda a Firefox a preparar el render */
+	will-change: backdrop-filter;
 }
 #s_lock,
 .app_view,
@@ -676,7 +662,6 @@ input[type="radio"]:checked::before {
 #h_lo,
 #h_st {
 	will-change: transform, opacity, backdrop-filter;
-	/* Fuerza a Firefox a crear una capa de dibujo independiente */
 	transform: translateZ(0);
 }
 
@@ -685,7 +670,7 @@ div[class^="group_"] {
 	transition: background 0.15s ease;
 }
 div[class^="group_"]:active {
-	background: var(--sys-third); /* O un color más claro que el actual */
+	background: var(--sys-third);
 	filter: brightness(1.2);
 }
 
@@ -706,7 +691,6 @@ input[type="range"]::-webkit-slider-runnable-track {
 	height: 10px;
 	border-radius: 10px;
 }
-/* firefox */
 input[type="range"]::-moz-range-track {
 	background: var(--sys-fourth);
 	border: 2px solid var(--sys-second);
@@ -725,7 +709,6 @@ input[type="range"]::-webkit-slider-thumb {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 	transition: transform 0.1s ease;
 }
-/* firefox */
 input[type="range"]::-moz-range-thumb {
 	border: none;
 	background-color: whitesmoke;
@@ -764,6 +747,14 @@ input[type="range"]::-moz-range-progress {
 .setup_title {
 	position: absolute;
 	top: 40px;
+	left: 50%;
+	translate: -50%;
+	color: black;
+	width: 100%;
+}
+.setuptext {
+	position: absolute;
+	top: 80px;
 	left: 50%;
 	translate: -50%;
 	color: black;

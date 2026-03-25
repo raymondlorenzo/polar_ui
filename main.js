@@ -99,7 +99,7 @@ const moveLockScreen = ({ swipeY, reset, success }) => {
 	if (success) {
 		lock.style.transition = "top calc(0.3s * var(--delta-time)) ease"
 		lock.style.top = "-105%"
-		/*if (navigator.vibrate) */ navigator.vibrate(30)
+		navigator.vibrate(30)
 		return
 	}
 	if (varlist.locked === false) return
@@ -162,7 +162,6 @@ configureSimpleSwipe({
 	callback: () => {
 		const allApp = $qa(".app")
 		if (varlist.locked === true) {
-			//$("s_lock").classList.add("hidden")
 			varlist.locked = false
 			updateLockState()
 			$("h_st").classList.remove("hidden")
@@ -172,13 +171,11 @@ configureSimpleSwipe({
 		}
 	},
 	startcall: () => {
-		//$("n_bar").classList.add("shrink")
 		$("n_bar").classList.add("visible")
 		navigator.vibrate(5)
 	},
 	duringMove: moveLockScreen,
 	endcall: () => {
-		//$("n_bar").classList.remove("shrink")
 		clearTimeout(hidingNav)
 		hidingNav = setTimeout(() => {
 			$("n_bar").classList.remove("visible")
@@ -191,7 +188,6 @@ configureSimpleSwipe({
 	element: $("st_n"),
 	threshold: 50,
 	callback: () => {
-		//$("s_lock").classList.remove("hidden")
 		varlist.locked = true
 		updateLockState()
 		$("h_st").classList.add("hidden")
@@ -226,10 +222,8 @@ const updateClock = () => {
 setInterval(updateClock, 1000)
 updateClock()
 
-// Vibecoding section
 const openApp = (i, w) => {
 	const icon = i.currentTarget
-	//const appWin = $("app_window")
 	const appWin = $(w)
 	const home = $("s_home")
 
@@ -243,7 +237,6 @@ const openApp = (i, w) => {
 	appWin.style.transformOrigin = `${centerX}px ${centerY}px`
 
 	const skVal = screenMiddle + centerX >= 300 ? 15 : -15
-	/*appWin.style.transform = `skew(${skVal}deg)`*/
 	appWin.classList.remove("hidden")
 	appWin.style.pointerEvents = "auto"
 	navigator.vibrate(20)
@@ -300,7 +293,7 @@ if ("getBattery" in navigator) {
 	alert(
 		"Battery API is not supported in this browser, this may be because you're on Firefox or using an iOS device. Sorry for the inconvinience."
 	)
-	$("b_ind").style.width = `100%` // Valor por defecto para que no se vea vacío
+	$("b_ind").style.width = `100%`
 }
 
 const updateLockState = () => {
@@ -391,29 +384,53 @@ $("bright-slider").addEventListener("input", () => {
 	$("screen").style.filter = "brightness(" + $("bright-slider").value + ")"
 })
 
+loa_txt = "PolarUI"
+loa_index = 0
+canEffectStartUp = true
+
 window.addEventListener("load", () => {
-	setTimeout(() => {
-		setInterval(() => {
-			// $("loading_title").textContent.slice(1)
-			$("loading_title").textContent = $("loading_title").textContent.slice(0, -1)
-		}, 125)
-	}, 700)
-	setTimeout(() => {
-		setInterval(() => {
-			$("loading_title").textContent = "PolarUI"
-		}, 1100)
-	}, 1000)
-	randomStartNumber = Math.random() * 8
-	if (randomStartNumber < 2.5) {
-		startupTime = 2500
-	} else {
-		startupTime = randomStartNumber * 1000
+	const loa_txt = "PolarUI"
+	const titleEl = $("loading_title")
+
+	const deleteEffect = () => {
+		let text = titleEl.textContent
+		const delInterval = setInterval(() => {
+			if (text.length > 0) {
+				text = text.slice(0, -1)
+				titleEl.textContent = text
+			} else {
+				clearInterval(delInterval)
+				setTimeout(typeEffect, 200)
+			}
+		}, 100)
 	}
-	console.log(startupTime)
-	setTimeout(() => ($("loading_screen").style.display = "none"), startupTime)
+
+	const typeEffect = () => {
+		let i = 0
+		const typeInterval = setInterval(() => {
+			if (i < loa_txt.length) {
+				titleEl.textContent += loa_txt[i]
+				i++
+			} else {
+				clearInterval(typeInterval)
+				setTimeout(deleteEffect, 1000)
+			}
+		}, 120)
+	}
+
+	setTimeout(deleteEffect, 800)
+
+	let randomStartNumber = Math.random() * 11
+	let startupTime = randomStartNumber < 2.5 ? 2500 : randomStartNumber * 1000
+
+	setTimeout(() => {
+		$("loading_screen").style.opacity = "0"
+		setTimeout(() => ($("loading_screen").style.display = "none"), 500)
+	}, startupTime)
 })
 
-hasSeenSetup = localStorage.getItem("polar_setupseen") ?? false
+const hasSeenSetup = localStorage.getItem("polar_setupseen") === "true"
+
 setTimeout(() => {
 	if (hasSeenSetup) {
 		subsetup_view.style.top = "150%"

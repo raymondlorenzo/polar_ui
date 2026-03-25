@@ -53,9 +53,11 @@
 				<section id="app_window" class="app_view hidden"></section>
 				<section id="setup_view">
 					<h2 class="setup_title">Let's begin the setup</h2>
+					<p class="setuptext"></p>
 					<button class="setup_next" onclick="subsetup_view.classList.add('visible')">Continue</button>
 					<section id="subsetup_view">
 						<h2 class="setup_title">Patch Notes</h2>
+						<p class="setuptext">Changelog: 26.0.6.3 <br /> - Remade startup screen <br />- Changelog added <br />- System tab added on settings</p>
 						<button class="setup_next" onclick="subsetup_view.style.top = '150%'; subsetup_view.style.opacity = '0'; setup_view.style.top = '150%'; setup_view.style.opacity = '0'; localStorage.setItem('polar_setupseen', true)">Continue</button>
 					</section>
 				</section>
@@ -66,8 +68,8 @@
 					<div class="group_middle sub-sel" data-subapp="w_set_dis">Display and Brightness</div>
 					<div class="group_lower sub-sel" data-subapp="">Sound and Haptics</div>
 					<div class="group_alone">Security</div>
-					<div class="group_alone">Accessibility</div>
-					<div class="group_alone">System</div>
+					<div class="group_alone sub-sel">Accessibility</div>
+					<div class="group_alone sub-sel" data-subapp="w_set_sys">System</div>
 					<section class="subapp hidden" id="w_set_per">
 						<div class="globheader">
 							<button class="subapp_exit" id="suba_ext" data-closes="w_set_per">⇐</button>
@@ -99,7 +101,8 @@
 							<p>My Phone</p>
 						</div>
 						<img src="favbanner.png" width="275" style="border-radius: 32.5px" />
-						<p>PolarUI 26.0.6 Beta</p>
+						<p>PolarUI 26.0.6.3 Beta</p>
+						<p>Build Number: 8284JF828RB9</p>
 					</section>
 					<section class="subapp hidden" id="w_set_dis">
 						<div class="globheader">
@@ -108,6 +111,16 @@
 						</div>
 						<h2>Brightness</h2>
 						<input type="range" min="0.1" max="1" step="0.025" value="1" id="bright-slider" />
+					</section>
+					<section class="subapp hidden" id="w_set_sys">
+						<div class="globheader">
+							<button class="subapp_exit" id="suba_ext" data-closes="w_set_sys">⇐</button>
+							<p>System</p>
+						</div>
+						<div class="group_upper">Language</div>
+						<div class="group_lower">Time</div>
+						<div class="group_alone">User Manual</div>
+						<div class="group_alone">Developer Options</div>
 					</section>
 				</section>
 				<section id="w_clock" class="app_view hidden">
@@ -119,7 +132,7 @@
 				<section id="w_terminal" class="app_view hidden">
 					<div class="term_header">P-onsole</div>
 					<div class="term_content">
-						<p>PolarOS v26.0.6 (00017)</p>
+						<p>PolarOS v26.0.6.3 (00021)</p>
 						<p>You currently don't have sudo permits</p>
 						<p class="prompt">user@polar:~$ <span class="cursor">_</span></p>
 					</div>
