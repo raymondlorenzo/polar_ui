@@ -852,7 +852,7 @@ button.setup_next {
 	box-sizing: border-box;
 }
 
-.btn {
+.calc_btn {
 	width: 55px;
 	height: 55px;
 	border-radius: 50%;
@@ -868,19 +868,19 @@ button.setup_next {
 	user-select: none;
 }
 
-.btn.op {
+.calc_btn.op {
 	background: #331818;
 	color: var(--sys-second);
 }
-.btn.equal {
+.calc_btn.equal {
 	background: var(--sys-third);
 	color: #fff;
 }
-.btn.red {
+.calc_btn.red {
 	color: var(--sys-second);
 }
 
-.btn:active {
+.calc_btn:active {
 	transition: 0.15s;
 	transform: scale(0.98);
 	opacity: 0.5;

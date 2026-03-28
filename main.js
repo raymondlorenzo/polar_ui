@@ -481,9 +481,12 @@ function updatePreview() {
 	previewDisplay.textContent = val !== null ? val : ""
 }
 
-// ==========================
-// NÚT SỐ
-// ==========================
+document.querySelectorAll(".calc_btn").forEach((btn) => {
+	btn.onclick = () => {
+		navigator.vibrate(50)
+	}
+})
+
 document.querySelectorAll(".number").forEach((btn) => {
 	btn.onclick = () => {
 		if (justCalculated) {
@@ -500,9 +503,6 @@ document.querySelectorAll(".number").forEach((btn) => {
 	}
 })
 
-// ==========================
-// NÚT TOÁN TỬ
-// ==========================
 document.querySelectorAll(".operator").forEach((btn) => {
 	btn.onclick = () => {
 		let op = btn.dataset.op
@@ -532,18 +532,12 @@ document.querySelectorAll(".operator").forEach((btn) => {
 	}
 })
 
-// ==========================
-// AC
-// ==========================
 document.querySelector("[data-action='clear']").onclick = () => {
 	expression = ""
 	mainDisplay.textContent = "0"
 	previewDisplay.textContent = ""
 }
 
-// ==========================
-// BACKSPACE
-// ==========================
 document.querySelector("[data-action='backspace']").onclick = () => {
 	if (!expression) return
 	expression = expression.slice(0, -1)
@@ -551,10 +545,7 @@ document.querySelector("[data-action='backspace']").onclick = () => {
 	updatePreview()
 	scrollToBottom()
 }
-
-// ==========================
-// BẰNG (=)
-// ==========================
+ñ
 document.querySelector("[data-action='equal']").onclick = () => {
 	const result = safeEval(expression)
 	if (result === null) return
