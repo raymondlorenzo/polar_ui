@@ -4,7 +4,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="author" content="RaySterling" />
-		<meta name="description" content="Mobile OS inspired Web UI" />
+		<meta name="description" content="Mobile OS inspired Web UI with subtle translucency" />
 		<title>PolarUI</title>
 		<link rel="stylesheet" href="style.css" />
 		<link rel="icon" href="favicon.png" />
@@ -45,8 +45,8 @@
 				<section id="s_home">
 					<button class="nostyle"><img src="images/settings.webp" data-app="w_settings" class="h_icon" /></button>
 					<button class="nostyle"><img src="images/clock.webp" data-app="w_clock" class="h_icon" /></button>
-					<button class="nostyle"><img src="" data-app="w_none" class="h_icon" /></button>
-					<button class="nostyle"><img src="" data-app="w_none" class="h_icon" /></button>
+					<button class="nostyle"><img src="images/app_store.webp" data-app="w_store" class="h_icon" /></button>
+					<button class="nostyle"><img src="images/calc.webp" data-app="w_calc" class="h_icon" /></button>
 					<button class="nostyle"><img src="images/terminal.webp" data-app="w_terminal" class="h_icon" /></button>
 				</section>
 
@@ -57,8 +57,20 @@
 					<button class="setup_next" onclick="subsetup_view.classList.add('visible')">Continue</button>
 					<section id="subsetup_view">
 						<h2 class="setup_title">Patch Notes</h2>
-						<p class="setuptext">Changelog: 26.0.6.3 <br /> - Remade startup screen <br />- Changelog added <br />- System tab added on settings</p>
-						<button class="setup_next" onclick="subsetup_view.style.top = '150%'; subsetup_view.style.opacity = '0'; setup_view.style.top = '150%'; setup_view.style.opacity = '0'; localStorage.setItem('polar_setupseen', true)">Continue</button>
+						<p class="setuptext">
+							This is just a webpage resembling a mobile OS interface. This doesn't belong or associates with any trademark or company.
+						</p>
+						<button
+							class="setup_next"
+							onclick="
+								subsetup_view.style.top = '150%'
+								subsetup_view.style.opacity = '0'
+								setup_view.style.top = '150%'
+								setup_view.style.opacity = '0'
+								localStorage.setItem('polar_setupseen', true)
+							">
+							Continue
+						</button>
 					</section>
 				</section>
 				<section id="w_settings" class="app_view hidden">
@@ -101,7 +113,7 @@
 							<p>My Phone</p>
 						</div>
 						<img src="favbanner.png" width="275" style="border-radius: 32.5px" />
-						<p>PolarUI 26.0.6.3 Beta</p>
+						<p>PolarUI <span class="vNameShort"></span> "<span class="vCodeName"></span>" Beta</p>
 						<p>Build Number: 8284JF828RB9</p>
 					</section>
 					<section class="subapp hidden" id="w_set_dis">
@@ -132,11 +144,56 @@
 				<section id="w_terminal" class="app_view hidden">
 					<div class="term_header">P-onsole</div>
 					<div class="term_content">
-						<p>PolarOS v26.0.6.3 (00021)</p>
+						<p>PolarOS <span class="vName"></span> (<span class="vCode"></span>)</p>
 						<p>You currently don't have sudo permits</p>
 						<p class="prompt">user@polar:~$ <span class="cursor">_</span></p>
 					</div>
 				</section>
+				<section
+					id="w_store"
+					class="app_view hidden"
+					style="padding-top: 35px; display: flex; flex-direction: column; align-items: center; text-align: center">
+					<h2>App Store</h2>
+					<div class="group_upper">Apps</div>
+					<div class="group_lower">Games</div>
+					<div class="group_alone">Updates</div>
+				</section>
+
+				<section id="w_calc" class="app_view hidden">
+					<div class="calculator">
+						<div class="calc_screen">
+							<div id="mainDisplay">0</div>
+							<div id="previewDisplay"></div>
+						</div>
+						<div class="keys">
+							<button class="btn orange" data-action="clear">AC</button>
+							<button class="btn gray" data-action="backspace">⌫</button>
+							<button class="btn gray operator" data-op="+-">+/−</button>
+							<button class="btn red operator" data-op="/">:</button>
+
+							<button class="btn gray number">7</button>
+							<button class="btn gray number">8</button>
+							<button class="btn gray number">9</button>
+							<button class="btn red operator" data-op="*">×</button>
+
+							<button class="btn gray number">4</button>
+							<button class="btn gray number">5</button>
+							<button class="btn gray number">6</button>
+							<button class="btn red operator" data-op="-">−</button>
+
+							<button class="btn gray number">1</button>
+							<button class="btn gray number">2</button>
+							<button class="btn gray number">3</button>
+							<button class="btn red operator" data-op="+">+</button>
+
+							<button class="btn gray number">00</button>
+							<button class="btn gray number">0</button>
+							<button class="btn gray number">.</button>
+							<button class="btn equal" data-action="equal">=</button>
+						</div>
+					</div>
+				</section>
+				<!-- blank window used as placeholder -->
 				<section id="w_none" class="app_view hidden">none</section>
 			</div>
 		</main>

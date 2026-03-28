@@ -99,7 +99,7 @@ const moveLockScreen = ({ swipeY, reset, success }) => {
 	if (success) {
 		lock.style.transition = "top calc(0.3s * var(--delta-time)) ease"
 		lock.style.top = "-105%"
-		navigator.vibrate(30)
+		navigator.vibrate(40)
 		return
 	}
 	if (varlist.locked === false) return
@@ -172,7 +172,7 @@ configureSimpleSwipe({
 	},
 	startcall: () => {
 		$("n_bar").classList.add("visible")
-		navigator.vibrate(5)
+		navigator.vibrate(25)
 	},
 	duringMove: moveLockScreen,
 	endcall: () => {
@@ -239,7 +239,7 @@ const openApp = (i, w) => {
 	const skVal = screenMiddle + centerX >= 300 ? 15 : -15
 	appWin.classList.remove("hidden")
 	appWin.style.pointerEvents = "auto"
-	navigator.vibrate(20)
+	navigator.vibrate(35)
 	home.classList.add("zoom-out")
 	$("n_bar").classList.add("visible")
 	clearTimeout(hidingNav)
@@ -293,7 +293,7 @@ if ("getBattery" in navigator) {
 	alert(
 		"Battery API is not supported in this browser, this may be because you're on Firefox or using an iOS device. Sorry for the inconvinience."
 	)
-	$("b_ind").style.width = `100%`
+	$("b_sect").style.display = "none"
 }
 
 const updateLockState = () => {
@@ -439,3 +439,133 @@ setTimeout(() => {
 		setup_view.style.opacity = "0"
 	}
 }, 500)
+
+let versionCodeName = "Esclera"
+let versionCode = "0025"
+let versionName = "26.0.4"
+let versionNameShorthand = "26"
+
+$qa(".vName").forEach((el) => (el.textContent = versionName))
+$qa(".vNameShort").forEach((el) => (el.textContent = versionNameShorthand))
+$qa(".vCode").forEach((el) => (el.textContent = versionCode))
+$qa(".vCodeName").forEach((el) => (el.textContent = versionCodeName))
+
+// code from other repo xdd
+
+const mainDisplay = document.getElementById("mainDisplay")
+const previewDisplay = document.getElementById("previewDisplay")
+
+let expression = ""
+let justCalculated = false
+
+function formatScreen(str) {
+	return str.replace(/\*/g, "×").replace(/\//g, ":")
+}
+
+function safeEval(str) {
+	try {
+		const val = Function("return " + str)()
+		if (!isFinite(val) || isNaN(val)) return null
+		return val
+	} catch {
+		return null
+	}
+}
+
+function updatePreview() {
+	if (justCalculated) {
+		previewDisplay.textContent = ""
+		return
+	}
+	const val = safeEval(expression)
+	previewDisplay.textContent = val !== null ? val : ""
+}
+
+// ==========================
+// NÚT SỐ
+// ==========================
+document.querySelectorAll(".number").forEach((btn) => {
+	btn.onclick = () => {
+		if (justCalculated) {
+			expression = ""
+			justCalculated = false
+		}
+
+		const n = btn.textContent
+
+		expression += n
+		mainDisplay.textContent = formatScreen(expression)
+		updatePreview()
+		scrollToBottom()
+	}
+})
+
+// ==========================
+// NÚT TOÁN TỬ
+// ==========================
+document.querySelectorAll(".operator").forEach((btn) => {
+	btn.onclick = () => {
+		let op = btn.dataset.op
+
+		if (op === "+-") {
+			if (expression && !isNaN(expression)) {
+				expression = String(-Number(expression))
+				mainDisplay.textContent = expression
+				updatePreview()
+			}
+			return
+		}
+
+		if (!expression) return
+
+		justCalculated = false
+
+		const last = expression[expression.length - 1]
+		if ("+-*/".includes(last)) {
+			expression = expression.slice(0, -1)
+		}
+
+		expression += op
+		mainDisplay.textContent = formatScreen(expression)
+		updatePreview()
+		scrollToBottom()
+	}
+})
+
+// ==========================
+// AC
+// ==========================
+document.querySelector("[data-action='clear']").onclick = () => {
+	expression = ""
+	mainDisplay.textContent = "0"
+	previewDisplay.textContent = ""
+}
+
+// ==========================
+// BACKSPACE
+// ==========================
+document.querySelector("[data-action='backspace']").onclick = () => {
+	if (!expression) return
+	expression = expression.slice(0, -1)
+	mainDisplay.textContent = expression ? formatScreen(expression) : "0"
+	updatePreview()
+	scrollToBottom()
+}
+
+// ==========================
+// BẰNG (=)
+// ==========================
+document.querySelector("[data-action='equal']").onclick = () => {
+	const result = safeEval(expression)
+	if (result === null) return
+
+	mainDisplay.textContent = result
+	previewDisplay.textContent = ""
+	expression = String(result)
+	justCalculated = true
+	scrollToBottom()
+}
+
+function scrollToBottom() {
+	mainDisplay.scrollLeft = mainDisplay.scrollWidth
+}
