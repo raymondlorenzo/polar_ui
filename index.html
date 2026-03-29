@@ -8,240 +8,264 @@
 		<title>PolarUI</title>
 		<link rel="stylesheet" href="style.css" />
 		<link rel="icon" href="favicon.png" />
+		<link rel="manifest" href="manifest.json" />
 	</head>
 	<body>
-		<main id="screen">
-			<div id="screen_2">
-				<section id="s_black"></section>
-				<div id="status">
-					<div>
-						<div id="st_n">
-							<span class="h_hm" id="h_st"></span>
-						</div>
-						<div id="st_c">
-							<div id="b_sect">
-								<div id="b_ind"></div>
+		<div id="main-wrapper">
+			<main id="screen">
+				<div id="screen_2">
+					<section id="s_black" class="hidden"></section>
+					<div id="status">
+						<div>
+							<div id="st_n">
+								<span class="h_hm" id="h_st"></span>
+							</div>
+							<div id="st_c">
+								<div id="b_sect">
+									<div id="b_ind"></div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div id="camera"></div>
-				<div id="n_container">
-					<div id="nav_sect"></div>
-					<div id="n_bar"></div>
-				</div>
-				<!-- -->
-				<section id="loading_screen">
-					<h2 id="loading_title">PolarUI</h2>
-					<!-- <span id="loading_text"></span> -->
-				</section>
-				<!-- -->
-				<section id="s_cont" class="hidden"></section>
-				<section id="s_lock" class="app">
-					<span class="d_us" id="d_lo"></span>
-					<span class="h_hm" id="h_lo"></span>
-					<p id="t_swipe">Swipe handle to unlock</p>
-				</section>
-				<section id="s_sublock" class="app">
-					<div id="pwd_dots">
-						<div class="pwd_dot one"></div>
-						<div class="pwd_dot two"></div>
-						<div class="pwd_dot three"></div>
-						<div class="pwd_dot four"></div>
+					<div id="camera">
+						<div id="cam_content" class="hidden" style="display: none">
+							<span id="cam_track">Salsa Mix...</span>
+							<button id="cam_play">▶</button>
+						</div>
 					</div>
-					<div id="pwd_kbrd" class="num_kbrd">
-						<button class="pwd_btn" data-digit="1">1</button>
-						<button class="pwd_btn" data-digit="2">2</button>
-						<button class="pwd_btn" data-digit="3">3</button>
-
-						<button class="pwd_btn" data-digit="4">4</button>
-						<button class="pwd_btn" data-digit="5">5</button>
-						<button class="pwd_btn" data-digit="6">6</button>
-
-						<button class="pwd_btn" data-digit="7">7</button>
-						<button class="pwd_btn" data-digit="8">8</button>
-						<button class="pwd_btn" data-digit="9">9</button>
-
-						<button class="pwd_btn" data-digit="bksp">x</button>
-						<button class="pwd_btn" data-digit="0">0</button>
-						<button class="pwd_btn" data-digit="check">√</button>
+					<div id="n_container">
+						<div id="nav_sect"></div>
+						<div id="n_bar"></div>
 					</div>
-				</section>
-				<section id="s_home">
-					<button class="nostyle"><img src="images/settings.webp" data-app="w_settings" class="h_icon" /></button>
-					<button class="nostyle"><img src="images/clock.webp" data-app="w_clock" class="h_icon" /></button>
-					<button class="nostyle"><img src="images/app_store.webp" data-app="w_store" class="h_icon" /></button>
-					<button class="nostyle"><img src="images/calc.webp" data-app="w_calc" class="h_icon" /></button>
-					<button class="nostyle"><img src="images/terminal.webp" data-app="w_terminal" class="h_icon" /></button>
-					<button class="nostyle"><img src="images/browser.webp" data-app="w_none" class="h_icon" /></button>
-					<button class="nostyle"><img src="" data-app="w_none" class="h_icon" /></button>
-					<button class="nostyle"><img src="" data-app="w_none" class="h_icon" /></button>
-				</section>
-
-				<section id="app_window" class="app_view hidden"></section>
-				<section id="setup_view">
-					<h2 class="setup_title">Let's begin the setup</h2>
-					<p class="setuptext"></p>
-					<button class="setup_next" onclick="subsetup_view.classList.add('visible')">Continue</button>
-					<section id="subsetup_view">
-						<h2 class="setup_title">Patch Notes</h2>
-						<p class="setuptext">
-							This is just a webpage resembling a mobile OS interface. This doesn't belong or associates with any trademark or company.
-						</p>
-						<button
-							class="setup_next"
-							onclick="
-								subsetup_view.style.top = '150%'
-								subsetup_view.style.opacity = '0'
-								setup_view.style.top = '150%'
-								setup_view.style.opacity = '0'
-								localStorage.setItem('polar_setupseen', true)
-							">
-							Continue
-						</button>
+					<!-- -->
+					<section id="loading_screen">
+						<h2 id="loading_title">PolarUI</h2>
+						<!-- <span id="loading_text"></span> -->
 					</section>
-				</section>
-				<section id="w_settings" class="app_view hidden">
-					<h2>Settings</h2>
-					<div class="group_alone sub-sel" data-subapp="w_set_abo">My Phone</div>
-					<div class="group_upper sub-sel" data-subapp="w_set_per">Personalization</div>
-					<div class="group_middle sub-sel" data-subapp="w_set_dis">Display and Brightness</div>
-					<div class="group_lower sub-sel" data-subapp="">Sound and Haptics</div>
-					<div class="group_alone sub-sel" data-subapp="w_set_sec">Security</div>
-					<div class="group_alone sub-sel">Accessibility</div>
-					<div class="group_alone sub-sel" data-subapp="w_set_sys">System</div>
-					<section class="subapp hidden" id="w_set_per">
-						<div class="globheader">
-							<button class="subapp_exit" id="suba_ext" data-closes="w_set_per">⇐</button>
-							<p>Personalization</p>
+					<!-- -->
+					<section id="s_cont" class="hidden"></section>
+					<section id="s_lock" class="app">
+						<span class="d_us" id="d_lo"></span>
+						<span class="h_hm" id="h_lo"></span>
+						<p id="t_swipe">Swipe handle to unlock</p>
+					</section>
+					<section id="s_sublock" class="app">
+						<div id="pwd_dots">
+							<div class="pwd_dot one"></div>
+							<div class="pwd_dot two"></div>
+							<div class="pwd_dot three"></div>
+							<div class="pwd_dot four"></div>
 						</div>
-						<h2>Wallpaper</h2>
-						<div id="s_w_carr">
-							<img src="images/wall-01.png" class="img_wall" />
-							<img src="images/wall-02.png" class="img_wall" />
-							<img src="images/wall-03.png" class="img_wall" />
-							<img src="images/wall-04.png" class="img_wall" />
-							<img src="images/wall-05.png" class="img_wall" />
-							<img src="images/wall-06.png" class="img_wall" />
-							<img src="images/wall-07.png" class="img_wall" />
+						<div id="pwd_kbrd" class="num_kbrd">
+							<button class="pwd_btn" data-digit="1">1</button>
+							<button class="pwd_btn" data-digit="2">2</button>
+							<button class="pwd_btn" data-digit="3">3</button>
+
+							<button class="pwd_btn" data-digit="4">4</button>
+							<button class="pwd_btn" data-digit="5">5</button>
+							<button class="pwd_btn" data-digit="6">6</button>
+
+							<button class="pwd_btn" data-digit="7">7</button>
+							<button class="pwd_btn" data-digit="8">8</button>
+							<button class="pwd_btn" data-digit="9">9</button>
+
+							<button class="pwd_btn" data-digit="bksp">x</button>
+							<button class="pwd_btn" data-digit="0">0</button>
+							<button class="pwd_btn" data-digit="check">√</button>
 						</div>
-						<input type="file" accept="image/*" style="display: none" id="w_upload" />
-						<label id="w_button" class="styled" for="w_upload">Upload Wallpaper</label>
+					</section>
+					<section id="s_home">
+						<button class="nostyle"><img src="images/settings.webp" data-app="w_settings" class="h_icon" /></button>
+						<button class="nostyle"><img src="images/clock.webp" data-app="w_clock" class="h_icon" /></button>
+						<button class="nostyle"><img src="images/app_store.webp" data-app="w_store" class="h_icon" /></button>
+						<button class="nostyle"><img src="images/calc.webp" data-app="w_calc" class="h_icon" /></button>
+						<button class="nostyle"><img src="images/terminal.webp" data-app="w_terminal" class="h_icon" /></button>
+						<button class="nostyle"><img src="images/browser.webp" data-app="w_none" class="h_icon" /></button>
+						<button class="nostyle"><img src="images/music.webp" data-app="w_music" class="h_icon" /></button>
+						<button class="nostyle"><img src="" data-app="w_none" class="h_icon" /></button>
+					</section>
+
+					<section id="app_window" class="app_view hidden"></section>
+					<section id="setup_view">
+						<h2 class="setup_title">Let's begin the setup</h2>
+						<p class="setuptext"></p>
+						<button class="setup_next" onclick="subsetup_view.classList.add('visible')">Continue</button>
+						<section id="subsetup_view">
+							<h2 class="setup_title">Patch Notes</h2>
+							<p class="setuptext">
+								This is just a webpage resembling a mobile OS interface. This doesn't belong or associates with any trademark or
+								company.
+							</p>
+							<button
+								class="setup_next"
+								onclick="
+									subsetup_view.style.top = '150%'
+									subsetup_view.style.opacity = '0'
+									setup_view.style.top = '150%'
+									setup_view.style.opacity = '0'
+									localStorage.setItem('polar_setupseen', true)
+								">
+								Continue
+							</button>
+						</section>
+					</section>
+					<section id="w_settings" class="app_view hidden">
+						<h2>Settings</h2>
+						<div class="group_alone sub-sel" data-subapp="w_set_abo">My Phone</div>
+						<div class="group_upper sub-sel" data-subapp="w_set_per">Personalization</div>
+						<div class="group_middle sub-sel" data-subapp="w_set_dis">Display and Brightness</div>
+						<div class="group_lower sub-sel" data-subapp="">Sound and Haptics</div>
+						<div class="group_alone sub-sel" data-subapp="w_set_sec">Security</div>
+						<div class="group_alone sub-sel">Accessibility</div>
+						<div class="group_alone sub-sel" data-subapp="w_set_sys">System</div>
+						<section class="subapp hidden" id="w_set_per">
+							<div class="globheader">
+								<button class="subapp_exit" id="suba_ext" data-closes="w_set_per">⇐</button>
+								<p>Personalization</p>
+							</div>
+							<h2>Wallpaper</h2>
+							<div id="s_w_carr">
+								<img src="images/wall-01.png" class="img_wall" />
+								<img src="images/wall-02.png" class="img_wall" />
+								<img src="images/wall-03.png" class="img_wall" />
+								<img src="images/wall-04.png" class="img_wall" />
+								<img src="images/wall-05.png" class="img_wall" />
+								<img src="images/wall-06.png" class="img_wall" />
+								<img src="images/wall-07.png" class="img_wall" />
+							</div>
+							<input type="file" accept="image/*" style="display: none" id="w_upload" />
+							<label id="w_button" class="styled" for="w_upload">Upload Wallpaper</label>
+							<br />
+							<h2>Clock style</h2>
+							<select id="p_cstyle">
+								<option value="normal">Normal</option>
+								<option value="normal-dark">Normal - Dark</option>
+								<option value="exclusion">Color Invert</option>
+								<option value="hard-light">Light Glass</option>
+								<option value="overlay">Clear Glass</option>
+							</select>
+							<div class="group_alone" id="schemebutton">Toggle Color Scheme</div>
+						</section>
+						<section class="subapp hidden" id="w_set_abo">
+							<div class="globheader">
+								<button class="subapp_exit" id="suba_ext" data-closes="w_set_abo">⇐</button>
+								<p>My Phone</p>
+							</div>
+							<img src="favbanner.png" width="275" style="border-radius: 32.5px" />
+							<p>PolarUI <span class="vNameShort"></span> "<span class="vCodeName"></span>" Beta</p>
+							<p>Build Number: 8284JF828RB9</p>
+						</section>
+						<section class="subapp hidden" id="w_set_dis">
+							<div class="globheader">
+								<button class="subapp_exit" id="suba_ext" data-closes="w_set_dis">⇐</button>
+								<p>Display</p>
+							</div>
+							<h2>Brightness</h2>
+							<input type="range" min="0.1" max="1" step="0.025" value="1" id="bright-slider" />
+						</section>
+						<section class="subapp hidden" id="w_set_sys">
+							<div class="globheader">
+								<button class="subapp_exit" id="suba_ext" data-closes="w_set_sys">⇐</button>
+								<p>System</p>
+							</div>
+							<div class="group_upper">Language</div>
+							<div class="group_lower">Time</div>
+							<div class="group_alone">User Manual</div>
+							<div class="group_alone">Developer Options</div>
+						</section>
+						<section class="subapp hidden" id="w_set_sec">
+							<div class="globheader">
+								<button class="subapp_exit" id="suba_ext" data-closes="w_set_sec">⇐</button>
+								<p>Security</p>
+							</div>
+							<div class="group_alone" id="setpwdtrigger">Set Password</div>
+						</section>
+					</section>
+					<section id="w_clock" class="app_view hidden">
+						<span class="h_hms" id="c_hour"></span>
 						<br />
-						<h2>Clock style</h2>
-						<select id="p_cstyle">
-							<option value="normal">Normal</option>
-							<option value="normal-dark">Normal - Dark</option>
-							<option value="exclusion">Color Invert</option>
-							<option value="hard-light">Light Glass</option>
-							<option value="overlay">Clear Glass</option>
-						</select>
+						<span class="d_us" id="c_date"></span>
 					</section>
-					<section class="subapp hidden" id="w_set_abo">
-						<div class="globheader">
-							<button class="subapp_exit" id="suba_ext" data-closes="w_set_abo">⇐</button>
-							<p>My Phone</p>
+					<section id="w_gallery" class="app_view hidden"></section>
+					<section id="w_terminal" class="app_view hidden" style="overflow-y: hidden">
+						<div class="term_header">P-onsole</div>
+						<div class="term_content">
+							<p>PolarOS <span class="vName"></span> (<span class="vCode"></span>)</p>
+							<p>You currently don't have sudo permits</p>
+							<p class="prompt">user@polar:~$ <span class="cursor">_</span></p>
 						</div>
-						<img src="favbanner.png" width="275" style="border-radius: 32.5px" />
-						<p>PolarUI <span class="vNameShort"></span> "<span class="vCodeName"></span>" Beta</p>
-						<p>Build Number: 8284JF828RB9</p>
 					</section>
-					<section class="subapp hidden" id="w_set_dis">
-						<div class="globheader">
-							<button class="subapp_exit" id="suba_ext" data-closes="w_set_dis">⇐</button>
-							<p>Display</p>
+					<section
+						id="w_store"
+						class="app_view hidden"
+						style="padding-top: 35px; display: flex; flex-direction: column; align-items: center; text-align: center">
+						<h2>App Store</h2>
+						<div class="group_upper">Apps</div>
+						<div class="group_lower">Games</div>
+						<div class="group_alone">Updates</div>
+					</section>
+
+					<section id="w_calc" class="app_view hidden">
+						<div class="calculator">
+							<div class="calc_screen">
+								<div id="mainDisplay">0</div>
+								<div id="previewDisplay"></div>
+							</div>
+							<div class="keys">
+								<button class="calc_btn orange" data-action="clear">AC</button>
+								<button class="calc_btn gray" data-action="backspace">⌫</button>
+								<button class="calc_btn gray operator" data-op="+-">+/−</button>
+								<button class="calc_btn red operator" data-op="/">:</button>
+
+								<button class="calc_btn gray number">7</button>
+								<button class="calc_btn gray number">8</button>
+								<button class="calc_btn gray number">9</button>
+								<button class="calc_btn red operator" data-op="*">×</button>
+
+								<button class="calc_btn gray number">4</button>
+								<button class="calc_btn gray number">5</button>
+								<button class="calc_btn gray number">6</button>
+								<button class="calc_btn red operator" data-op="-">−</button>
+
+								<button class="calc_btn gray number">1</button>
+								<button class="calc_btn gray number">2</button>
+								<button class="calc_btn gray number">3</button>
+								<button class="calc_btn red operator" data-op="+">+</button>
+
+								<button class="calc_btn gray number">00</button>
+								<button class="calc_btn gray number">0</button>
+								<button class="calc_btn gray number">.</button>
+								<button class="calc_btn equal" data-action="equal">=</button>
+							</div>
 						</div>
-						<h2>Brightness</h2>
-						<input type="range" min="0.1" max="1" step="0.025" value="1" id="bright-slider" />
 					</section>
-					<section class="subapp hidden" id="w_set_sys">
-						<div class="globheader">
-							<button class="subapp_exit" id="suba_ext" data-closes="w_set_sys">⇐</button>
-							<p>System</p>
+					<section id="w_music" class="app_view hidden">
+						<div class="music_container">
+							<div id="album_art_big"></div>
+							<h2 id="track_name">No current song</h2>
+							<input type="file" id="m_upload" accept="audio/*" style="display: none" />
+							<label for="m_upload" id="song_selector" class="styled">Select from library</label>
+
+							<div class="m_controls" id="music_controls">
+								<button id="m_play">▶</button>
+							</div>
 						</div>
-						<div class="group_upper">Language</div>
-						<div class="group_lower">Time</div>
-						<div class="group_alone">User Manual</div>
-						<div class="group_alone">Developer Options</div>
 					</section>
-					<section class="subapp hidden" id="w_set_sec">
-						<div class="globheader">
-							<button class="subapp_exit" id="suba_ext" data-closes="w_set_sec">⇐</button>
-							<p>Security</p>
-						</div>
-						<div class="group_alone" id="setpwdtrigger">Set Password</div>
-					</section>
-				</section>
-				<section id="w_clock" class="app_view hidden">
-					<span class="h_hms" id="c_hour"></span>
-					<br />
-					<span class="d_us" id="c_date"></span>
-				</section>
-				<section id="w_gallery" class="app_view hidden"></section>
-				<section id="w_terminal" class="app_view hidden">
-					<div class="term_header">P-onsole</div>
-					<div class="term_content">
-						<p>PolarOS <span class="vName"></span> (<span class="vCode"></span>)</p>
-						<p>You currently don't have sudo permits</p>
-						<p class="prompt">user@polar:~$ <span class="cursor">_</span></p>
+
+					<!-- blank window used as placeholder -->
+					<section id="w_none" class="app_view hidden">none</section>
+					<!-- dislogue box -->
+					<div id="dialoguebox" class="hidden">
+						<span id="dialoguetext">This is a test</span>
+						<button class="dialoguebutton first"></button>
+						<button class="dialoguebutton second"></button>
+						<button class="dialoguebutton third"></button>
+						<button class="dialoguebutton fourth" onclick="hideDialoguePopUp()">Cancel</button>
 					</div>
-				</section>
-				<section
-					id="w_store"
-					class="app_view hidden"
-					style="padding-top: 35px; display: flex; flex-direction: column; align-items: center; text-align: center">
-					<h2>App Store</h2>
-					<div class="group_upper">Apps</div>
-					<div class="group_lower">Games</div>
-					<div class="group_alone">Updates</div>
-				</section>
-
-				<section id="w_calc" class="app_view hidden">
-					<div class="calculator">
-						<div class="calc_screen">
-							<div id="mainDisplay">0</div>
-							<div id="previewDisplay"></div>
-						</div>
-						<div class="keys">
-							<button class="calc_btn orange" data-action="clear">AC</button>
-							<button class="calc_btn gray" data-action="backspace">⌫</button>
-							<button class="calc_btn gray operator" data-op="+-">+/−</button>
-							<button class="calc_btn red operator" data-op="/">:</button>
-
-							<button class="calc_btn gray number">7</button>
-							<button class="calc_btn gray number">8</button>
-							<button class="calc_btn gray number">9</button>
-							<button class="calc_btn red operator" data-op="*">×</button>
-
-							<button class="calc_btn gray number">4</button>
-							<button class="calc_btn gray number">5</button>
-							<button class="calc_btn gray number">6</button>
-							<button class="calc_btn red operator" data-op="-">−</button>
-
-							<button class="calc_btn gray number">1</button>
-							<button class="calc_btn gray number">2</button>
-							<button class="calc_btn gray number">3</button>
-							<button class="calc_btn red operator" data-op="+">+</button>
-
-							<button class="calc_btn gray number">00</button>
-							<button class="calc_btn gray number">0</button>
-							<button class="calc_btn gray number">.</button>
-							<button class="calc_btn equal" data-action="equal">=</button>
-						</div>
-					</div>
-				</section>
-				<!-- blank window used as placeholder -->
-				<section id="w_none" class="app_view hidden">none</section>
-				<!-- dislogue box -->
-				<div id="dialoguebox" class="hidden">
-					<span id="dialoguetext">This is a test</span>
-					<button class="dialoguebutton first"></button>
-					<button class="dialoguebutton second"></button>
-					<button class="dialoguebutton third"></button>
-					<button class="dialoguebutton fourth" onclick="hideDialoguePopUp()">Cancel</button>
 				</div>
-			</div>
-		</main>
+			</main>
+			<div id="pwr_btn"></div>
+		</div>
 		<script src="main.js"></script>
 	</body>
 </html>

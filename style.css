@@ -21,6 +21,13 @@
 
 	--delta-time: 1;
 }
+:root.light {
+	--sys-first: #0c111e;
+	--sys-second: #141b41;
+	--sys-third: #ff3366;
+	--sys-fourth: #8ac6d0;
+	--sys-fifth: #f5e6e8;
+}
 @font-face {
 	font-family: "ROTHEFIGHT";
 	src: url("./ROTHEFIGHT.woff2");
@@ -33,6 +40,10 @@
 	font-family: "ProductSansMed";
 	src: url("./ProductSans-Medium.woff2");
 }
+@font-face {
+	font-family: "Hookride";
+	src: url("./HOOKRIDE.woff2");
+}
 * {
 	box-sizing: border-box;
 	user-select: none;
@@ -43,7 +54,7 @@ html {
 }
 body {
 	height: 100vh;
-	background: var(--sys-fifth);
+	background: black !important;
 	color: whitesmoke;
 	display: block;
 	align-items: center;
@@ -53,6 +64,37 @@ body {
 	margin: 0;
 	font-family: "ProductSansMed", Verdana;
 }
+body.light {
+	color: black;
+	--sys-first: #0c111e;
+	--sys-second: #141b41;
+	--sys-third: #ff3366;
+	--sys-fourth: #8ac6d0;
+	--sys-fifth: #f5e6e8;
+}
+#main-wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: var(--sys-width);
+	height: var(--sys-height);
+}
+#pwr_btn {
+	position: absolute;
+	right: -8px;
+	top: 140px;
+	width: 8px;
+	height: 60px;
+	background: #999;
+	border-radius: 0 5px 5px 0;
+	cursor: pointer;
+	z-index: 10;
+	transition: transform 0.1s ease;
+}
+#pwr_btn:active {
+	transform: translateX(-2px);
+}
 #loading_screen {
 	display: flex;
 	position: absolute;
@@ -61,7 +103,7 @@ body {
 	width: 100%;
 	height: 100%;
 	z-index: 2001;
-	background: var(--sys-fifth);
+	background: black !important;
 	align-items: center;
 	justify-content: center;
 	transition:
@@ -74,12 +116,13 @@ body {
 	transition:
 		scale 0.55s ease,
 		transform 0.55s ease;
+	color: white !important;
 }
 #screen {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	position: relative;
+	top: 0;
+	left: 0;
+	transform: /* translate(-50%, -50%) */ none;
 	width: var(--sys-width);
 	height: var(--sys-height);
 	border: 2px solid black;
@@ -96,6 +139,25 @@ body {
 	box-shadow:
 		0 0 0 1px white,
 		var(--sys-shadow);
+}
+#s_black {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: auto;
+	z-index: 2005;
+	opacity: 1;
+	transition: opacity 0.15s linear;
+	background: black;
+}
+#s_black.hidden {
+	pointer-events: none;
+	opacity: 0;
+}
+#s_black.not(.hidden) {
+	pointer-events: auto;
 }
 #status {
 	position: absolute;
@@ -129,6 +191,7 @@ body {
 	font-family: "ProductSansMed", Verdana;
 	mix-blend-mode: difference !important;
 	scale: 0.85;
+	color: white !important;
 }
 #h_st.hidden {
 	opacity: 0;
@@ -182,8 +245,8 @@ body {
 	transition: width 0.325s ease;
 	will-change: width;
 }
-#camera.expand {
-	width: 90px;
+#camera.expanded {
+	width: 130px;
 }
 #n_bar {
 	position: absolute;
@@ -304,25 +367,29 @@ body {
 #h_lo.hard-light {
 	mix-blend-mode: hard-light;
 	opacity: 0.725;
+	color: white !important;
 }
 #h_lo.overlay {
 	mix-blend-mode: overlay;
 	opacity: 1;
 	filter: brightness(2.1);
+	color: white !important;
 }
 #h_lo.exclusion {
 	mix-blend-mode: exclusion;
 	opacity: 1;
+	color: white !important;
 }
 #h_lo.normal {
 	mix-blend-mode: normal;
 	opacity: 1;
 	filter: brightness(1);
+	color: white !important;
 }
 #h_lo.normal-dark {
 	mix-blend-mode: normal;
 	opacity: 1;
-	color: black;
+	color: black !important;
 }
 #d_lo {
 	position: absolute;
@@ -400,6 +467,7 @@ body {
 	overflow: auto;
 	overflow-x: hidden;
 	pointer-events: none;
+	will-change: transform, opacity;
 }
 
 .app_view:not(.hidden) {
@@ -419,7 +487,7 @@ body {
 		opacity calc(0.4s * var(--delta-time)) ease;
 }
 #s_home.zoom-out {
-	transform: translateY(50%);
+	transform: translateY(75%) scale(0.875);
 	opacity: 0.1;
 	pointer-events: none;
 }
@@ -434,15 +502,15 @@ body {
 	left: 50%;
 	translate: -50%;
 	font-family: "ROTHEFIGHT", Verdana;
-	font-size: 80px;
+	font-size: 82.5px;
 }
 #c_date {
 	position: absolute;
-	top: 220px;
+	top: 200px;
 	left: 50%;
 	translate: -50%;
 	font-family: "ProductSansMed", Verdana;
-	font-size: 17.5px;
+	font-size: 18.25px;
 }
 #s_w_carr {
 	width: 95%;
@@ -494,6 +562,8 @@ body {
 	font-size: 9px;
 	text-align: left;
 	line-height: 0.11rem;
+	background: black !important;
+	height: 100%;
 }
 .cursor {
 	animation: blink 1s step-end infinite;
@@ -866,7 +936,7 @@ button.setup_next {
 
 #mainDisplay {
 	font-size: 40px;
-	color: white;
+
 	min-height: 50px;
 
 	width: 100%;
@@ -888,7 +958,7 @@ button.setup_next {
 	font-size: 42px;
 	font-weight: 300;
 	box-sizing: border-box;
-	color: white;
+
 	min-height: 72px;
 	overflow-x: hidden;
 	overflow-y: visible;
@@ -908,8 +978,8 @@ button.setup_next {
 	border-radius: 50%;
 	border: none;
 	font-size: 24px;
-	color: #ccc;
-	background: var(--sys-fourth);
+	color: white !important;
+	background: #141b41;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -1047,4 +1117,40 @@ button.setup_next {
 	100% {
 		transform: translateX(0%);
 	}
+}
+#album_art_big {
+	width: 240px;
+	height: 240px;
+	border-radius: 15px;
+	background: var(--sys-fourth);
+	position: absolute;
+	top: 70px;
+	left: 50%;
+	translate: -50%;
+}
+#track_name {
+	position: absolute;
+	top: 300px;
+	left: 50%;
+	translate: -50%;
+	width: 100%;
+}
+#song_selector{
+	position: absolute;
+	top: 490px;
+	left: 50%;
+	translate: -50%;
+}
+#music_controls{
+	position: absolute;
+	top: 400px;
+	left: 50%;
+	translate: -50%;
+}
+#m_play{
+	width: 50px;
+	height: 50px;
+	border-radius: 15px;
+	border: none;
+	background: var(--sys-third);
 }

@@ -7,6 +7,17 @@ const varlist = {
 }
 let hidingNav
 let openApps = []
+
+let versionCodeName = "Esclera"
+let versionCode = "0034"
+let versionName = "26.2 Beta"
+let versionNameShorthand = "26"
+
+$qa(".vName").forEach((el) => (el.textContent = versionName))
+$qa(".vNameShort").forEach((el) => (el.textContent = versionNameShorthand))
+$qa(".vCode").forEach((el) => (el.textContent = versionCode))
+$qa(".vCodeName").forEach((el) => (el.textContent = versionCodeName))
+
 const configureSimpleSwipe = ({
 	axis,
 	dir,
@@ -92,6 +103,9 @@ const configureSimpleSwipe = ({
 let password = localStorage.getItem("polar_pwd") ?? ""
 let enteredPassword = ""
 let canUnlockAnim = false
+let lightScheme = localStorage.getItem("polar_darkscheme") === "true"
+document.documentElement.classList.toggle("light", lightScheme)
+document.body.classList.toggle("light", lightScheme)
 
 const moveLockScreen = ({ swipeY, reset, success }) => {
 	const lock = $("s_lock")
@@ -567,16 +581,6 @@ setTimeout(() => {
 	}
 }, 500)
 
-let versionCodeName = "Esclera"
-let versionCode = "0030"
-let versionName = "26.1"
-let versionNameShorthand = "26"
-
-$qa(".vName").forEach((el) => (el.textContent = versionName))
-$qa(".vNameShort").forEach((el) => (el.textContent = versionNameShorthand))
-$qa(".vCode").forEach((el) => (el.textContent = versionCode))
-$qa(".vCodeName").forEach((el) => (el.textContent = versionCodeName))
-
 // --- Lógica de la Calculadora PolarUI ---
 const mainDisplay = $("mainDisplay")
 const previewDisplay = $("previewDisplay")
@@ -711,6 +715,7 @@ $qa(".pwd_btn").forEach((btn) => {
 					setTimeout(() => dot.classList.remove("wrong"), 350)
 				})
 
+				navigator.vibrate(100)
 				$("pwd_dots").style.animation = "backAndForth 0.3s forwards"
 				setTimeout(() => {
 					$("pwd_dots").style.animation = ""
@@ -724,7 +729,7 @@ $qa(".pwd_btn").forEach((btn) => {
 $("setpwdtrigger").onclick = () => {
 	let newPassword = prompt("Insert new password (4 digits), or leave empty to clear:")
 
-	if (newPassword === null) return // Cancelado
+	if (newPassword === null) return
 
 	if (newPassword.trim() === "") {
 		password = ""
@@ -744,3 +749,82 @@ $("setpwdtrigger").onclick = () => {
 		console.log("New password set: " + appliedPassword)
 	}
 }
+$("schemebutton").onclick = () => {
+	lightScheme = !lightScheme
+	document.documentElement.classList.toggle("light", lightScheme)
+	document.body.classList.toggle("light", lightScheme)
+	localStorage.setItem("polar_darkscheme", lightScheme)
+}
+$("pwr_btn").onclick = () => {
+	const isOff = !$("s_black").classList.contains("hidden")
+
+	if (isOff) {
+		// --- DESPERTAR ---
+		$("s_black").classList.add("hidden")
+		navigator.vibrate(20)
+	} else {
+		// --- APAGAR Y BLOQUEAR ---
+		varlist.locked = true
+		updateLockState()
+
+		// Escondemos UI de la pantalla de inicio
+		$("h_st").classList.add("hidden")
+		$("s_home").classList.add("zoom-out")
+
+		// Resetear estados de desbloqueo
+		canUnlockAnim = false
+
+		// Si hay contraseña, preparar el teclado numérico
+		if (password !== "") {
+			$("s_sublock").classList.remove("hidden")
+			// Limpiar puntos de password anterior
+			$qa(".pwd_dot").forEach((dot) => dot.classList.remove("filled"))
+			enteredPassword = ""
+		}
+
+		// Mostrar pantalla de bloqueo y overlay negro
+		$("s_lock").style.top = "0px"
+		$("s_black").classList.remove("hidden")
+
+		navigator.vibrate(30)
+	}
+}
+
+// Variables nuevas
+let currentAudio = new Audio()
+let isPlaying = false
+
+const mUpload = $("m_upload")
+const mPlayBtn = $("m_play")
+const camPlayBtn = $("cam_play")
+
+mUpload.addEventListener("change", (e) => {
+	const file = e.target.files[0]
+	if (!file) return
+
+	const audioUrl = URL.createObjectURL(file)
+	currentAudio.src = audioUrl
+
+	$("track_name").textContent = file.name
+	$("cam_track").textContent = file.name
+
+	$("cam_content").classList.remove("hidden")
+	//$("camera").classList.add("expanded")
+})
+
+const togglePlay = () => {
+	if (currentAudio.paused) {
+		currentAudio.play()
+		mPlayBtn.textContent = "❚❚"
+		camPlayBtn.textContent = "❚❚"
+		$("camera").classList.add("expanded")
+	} else {
+		currentAudio.pause()
+		mPlayBtn.textContent = "▶"
+		camPlayBtn.textContent = "▶︎"
+		$("camera").classList.remove("expanded")
+	}
+}
+
+mPlayBtn.onclick = togglePlay
+camPlayBtn.onclick = togglePlay
