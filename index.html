@@ -12,9 +12,15 @@
 	</head>
 	<body>
 		<div id="main-wrapper">
+			<div id="act_btn"></div>
+			<div id="vo1_btn" class="vo_btn"></div>
+			<div id="vo2_btn" class="vo_btn"></div>
 			<main id="screen">
 				<div id="screen_2">
 					<section id="s_black" class="hidden"></section>
+					<div id="volume_bar" class="hidden">
+						<div id="volume_slider"></div>
+					</div>
 					<div id="status">
 						<div>
 							<div id="st_n">
@@ -74,6 +80,9 @@
 							<button class="pwd_btn" data-digit="check">√</button>
 						</div>
 					</section>
+					<section id="recents" class="hidden">
+						<p>No apps open</p>
+					</section>
 					<section id="s_home">
 						<button class="nostyle"><img src="images/settings.webp" data-app="w_settings" class="h_icon" /></button>
 						<button class="nostyle"><img src="images/clock.webp" data-app="w_clock" class="h_icon" /></button>
@@ -112,12 +121,20 @@
 					<section id="w_settings" class="app_view hidden">
 						<h2>Settings</h2>
 						<div class="group_alone sub-sel" data-subapp="w_set_abo">My Phone</div>
+
 						<div class="group_upper sub-sel" data-subapp="w_set_per">Personalization</div>
 						<div class="group_middle sub-sel" data-subapp="w_set_dis">Display and Brightness</div>
 						<div class="group_lower sub-sel" data-subapp="">Sound and Haptics</div>
+
+						<div class="group_upper" data-subapp="">Action Button</div>
+						<div class="group_lower" data-subapp="">Camera Button</div>
+
 						<div class="group_alone sub-sel" data-subapp="w_set_sec">Security</div>
+
 						<div class="group_alone sub-sel">Accessibility</div>
+
 						<div class="group_alone sub-sel" data-subapp="w_set_sys">System</div>
+
 						<section class="subapp hidden" id="w_set_per">
 							<div class="globheader">
 								<button class="subapp_exit" id="suba_ext" data-closes="w_set_per">⇐</button>
@@ -138,13 +155,11 @@
 							<br />
 							<h2>Clock style</h2>
 							<select id="p_cstyle">
+								<option value="glass">Glass</o>
 								<option value="normal">Normal</option>
 								<option value="normal-dark">Normal - Dark</option>
-								<option value="exclusion">Color Invert</option>
-								<option value="hard-light">Light Glass</option>
-								<option value="overlay">Clear Glass</option>
+								<option value="inversion">Color Inversion</option>
 							</select>
-							<div class="group_alone" id="schemebutton">Toggle Color Scheme</div>
 						</section>
 						<section class="subapp hidden" id="w_set_abo">
 							<div class="globheader">
@@ -162,6 +177,8 @@
 							</div>
 							<h2>Brightness</h2>
 							<input type="range" min="0.1" max="1" step="0.025" value="1" id="bright-slider" />
+							<br />
+							<div class="group_alone" id="schemebutton">Toggle Color Scheme</div>
 						</section>
 						<section class="subapp hidden" id="w_set_sys">
 							<div class="globheader">
@@ -179,6 +196,12 @@
 								<p>Security</p>
 							</div>
 							<div class="group_alone" id="setpwdtrigger">Set Password</div>
+						</section>
+						<section class="subapp hidden" id="w_set_act">
+							<div class="globheader">
+								<button class="subapp_exit" id="suba_ext" data-closes="w_set_act">⇐</button>
+								<p>Action Button</p>
+							</div>
 						</section>
 					</section>
 					<section id="w_clock" class="app_view hidden">
@@ -265,6 +288,7 @@
 				</div>
 			</main>
 			<div id="pwr_btn"></div>
+			<div id="cam_btn"></div>
 		</div>
 		<script src="main.js"></script>
 	</body>

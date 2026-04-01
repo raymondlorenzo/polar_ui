@@ -82,7 +82,7 @@ body.light {
 }
 #pwr_btn {
 	position: absolute;
-	right: -8px;
+	right: -7px;
 	top: 140px;
 	width: 8px;
 	height: 60px;
@@ -93,6 +93,66 @@ body.light {
 	transition: transform 0.1s ease;
 }
 #pwr_btn:active {
+	transform: translateX(-2px);
+}
+#act_btn {
+	position: absolute;
+	left: -7px;
+	top: 80px;
+	width: 8px;
+	height: 30px;
+	background: #999;
+	border-radius: 5px 0 0 5px;
+	cursor: pointer;
+	z-index: 10;
+	transition: transform 0.1s ease;
+}
+#act_btn:active {
+	transform: translateX(2px);
+}
+#vo1_btn {
+	position: absolute;
+	left: -7px;
+	top: 150px;
+	width: 8px;
+	height: 50px;
+	background: #999;
+	border-radius: 5px 0 0 5px;
+	cursor: pointer;
+	z-index: 10;
+	transition: transform 0.1s ease;
+}
+#vo1_btn:active {
+	transform: translateX(2px);
+}
+#vo2_btn {
+	position: absolute;
+	left: -7px;
+	top: 205px;
+	width: 8px;
+	height: 50px;
+	background: #999;
+	border-radius: 5px 0 0 5px;
+	cursor: pointer;
+	z-index: 10;
+	transition: transform 0.1s ease;
+}
+#vo2_btn:active {
+	transform: translateX(2px);
+}
+#cam_btn {
+	position: absolute;
+	right: -7px;
+	top: 400px;
+	width: 8px;
+	height: 120px;
+	background: #999;
+	border-radius: 0 5px 5px 0;
+	cursor: pointer;
+	z-index: 10;
+	transition: transform 0.1s ease;
+}
+#cam_btn:active {
 	transform: translateX(-2px);
 }
 #loading_screen {
@@ -364,18 +424,14 @@ body.light {
 	font-size: 140px;
 	text-align: center;
 }
-#h_lo.hard-light {
-	mix-blend-mode: hard-light;
-	opacity: 0.725;
-	color: white !important;
-}
-#h_lo.overlay {
-	mix-blend-mode: overlay;
+#h_lo.glass {
 	opacity: 1;
 	filter: brightness(2.1);
-	color: white !important;
+	color: transparent !important;
+	background: linear-gradient(to top, #6674, #eeee);
+	background-clip: text;
 }
-#h_lo.exclusion {
+#h_lo.inversion {
 	mix-blend-mode: exclusion;
 	opacity: 1;
 	color: white !important;
@@ -469,16 +525,20 @@ body.light {
 	pointer-events: none;
 	will-change: transform, opacity;
 }
-
 .app_view:not(.hidden) {
 	pointer-events: auto;
 }
-
 .app_view.hidden {
 	opacity: 0;
 	border-radius: 100px;
 	pointer-events: none;
 	transform: scale(0.05);
+}
+.tilt-left {
+	transform: scale(1) skew(2deg) !important;
+}
+.tilt-right {
+	transform: scale(1) skew(-2deg) !important;
 }
 
 #s_home {
@@ -659,6 +719,7 @@ div.group_alone {
 	margin: 5px;
 	overflow: hidden;
 }
+
 .subapp {
 	position: absolute;
 	top: 0;
@@ -681,12 +742,12 @@ div.group_alone {
 	align-items: center;
 	text-align: center;
 }
-
 .subapp.hidden {
 	opacity: 0;
 	pointer-events: none;
 	left: 100%;
 }
+
 .globheader {
 	background: var(--sys-fourth);
 	padding: 40px 0 4px;
@@ -1134,23 +1195,76 @@ button.setup_next {
 	left: 50%;
 	translate: -50%;
 	width: 100%;
+	text-overflow: ellipsis;
 }
-#song_selector{
+#song_selector {
 	position: absolute;
 	top: 490px;
 	left: 50%;
 	translate: -50%;
 }
-#music_controls{
+#music_controls {
 	position: absolute;
 	top: 400px;
 	left: 50%;
 	translate: -50%;
 }
-#m_play{
+#m_play {
 	width: 50px;
 	height: 50px;
 	border-radius: 15px;
 	border: none;
 	background: var(--sys-third);
+}
+#volume_bar {
+	position: absolute;
+	top: 145px;
+	left: 8px;
+	width: 20px;
+	height: 110px;
+	border: 2px solid #fff2;
+	background: #aaa1;
+	backdrop-filter: blur(5px);
+	border-radius: 20px;
+	z-index: 2006;
+	transition: left 0.2s ease-out;
+	overflow: hidden;
+}
+#volume_bar.hidden {
+	left: -20px;
+}
+#volume_slider {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: white;
+	transition: height 0.2s ease;
+}
+#recents {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white !important;
+	backdrop-filter: blur(4px);
+	z-index: 500;
+}
+#recents::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	background: var(--sys-third);
+	opacity: 45%;
+}
+#recents.hidden {
+	display: none;
 }

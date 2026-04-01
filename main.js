@@ -9,8 +9,8 @@ let hidingNav
 let openApps = []
 
 let versionCodeName = "Esclera"
-let versionCode = "0034"
-let versionName = "26.2 Beta"
+let versionCode = "0039"
+let versionName = "26.2.1"
 let versionNameShorthand = "26"
 
 $qa(".vName").forEach((el) => (el.textContent = versionName))
@@ -266,6 +266,19 @@ configureSimpleSwipe({
 	},
 	duringMove: showLockScreen
 })
+configureSimpleSwipe({
+	axis: "y",
+	dir: "up",
+	elemeny: $("n_container"),
+	threshold: 120,
+	callback: () => {
+		if ($("recents").classList.includes("hidden")) {
+			$("recents").classList.remove("hidden")
+		} else {
+			$("recents").classList.add("hidden")
+		}
+	}
+})
 
 const updateClock = () => {
 	const curDate = new Date()
@@ -326,6 +339,7 @@ $qa(".h_icon").forEach((icon) => {
 	icon.addEventListener("click", (e) => {
 		const targetAppId = icon.getAttribute("data-app")
 		openApp(e, targetAppId)
+		applyDynamicTilt(e, targetAppId)
 	})
 })
 const closeApp = () => {
@@ -507,8 +521,8 @@ $qa(".subapp_exit").forEach((el) => {
 	})
 })
 
-const savedCStyle = localStorage.getItem("polar_cstyle") ?? "normal"
-const listCStyle = ["normal", "normal-dark", "exclusion", "hard-light", "overlay"]
+const savedCStyle = localStorage.getItem("polar_cstyle") ?? "glass"
+const listCStyle = ["normal", "normal-dark", "inversion", "glass"]
 
 listCStyle.forEach((st) => $("h_lo").classList.remove(st))
 $("h_lo").classList.add(savedCStyle)
@@ -828,3 +842,68 @@ const togglePlay = () => {
 
 mPlayBtn.onclick = togglePlay
 camPlayBtn.onclick = togglePlay
+
+let volume = 100
+let volumeTimeout
+const updateVolumeUI = () => {
+	volume = Math.max(0, Math.min(100, volume))
+	const audioLevel = volume / 100
+
+	$("volume_bar").classList.remove("hidden")
+	$("volume_slider").style.height = `${volume}%`
+
+	clearTimeout(volumeTimeout)
+	volumeTimeout = setTimeout(() => {
+		$("volume_bar").classList.add("hidden")
+	}, 3000)
+	if (currentAudio) {
+		currentAudio.volume = audioLevel
+	}
+}
+
+$("vo1_btn").addEventListener("click", () => {
+	volume += 10
+	updateVolumeUI()
+	navigator.vibrate(10)
+})
+
+$("vo2_btn").addEventListener("click", () => {
+	volume -= 10
+	updateVolumeUI()
+	navigator.vibrate(10)
+})
+
+
+const applyDynamicTilt = (event, elementId) => {
+	const screen = $("screen")
+	const rect = screen.getBoundingClientRect()
+
+	// Centro de la pantalla
+	const centerX = rect.left + rect.width / 2
+	const centerY = rect.top + rect.height / 2
+
+	// Coordenadas del clic
+	const clickX = event.clientX
+	const clickY = event.clientY
+
+	const targetApp = $(elementId)
+
+	// Lógica de cuadrantes
+	// Si (arriba y izquierda) O (abajo y derecha) -> Tilt Left
+	// Si (arriba y derecha) O (abajo y izquierda) -> Tilt Right
+
+	const isTop = clickY < centerY
+	const isLeft = clickX < centerX
+
+	if ((isTop && isLeft) || (!isTop && !isLeft)) {
+		targetApp.classList.add("tilt-left")
+	} else {
+		targetApp.classList.add("tilt-right")
+	}
+
+	// Quitar el tilt después de que termine la animación de apertura
+	// Ajusta el tiempo (400ms) según la duración de tu animación en CSS
+	setTimeout(() => {
+		targetApp.classList.remove("tilt-left", "tilt-right")
+	}, 200)
+}
